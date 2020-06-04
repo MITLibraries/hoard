@@ -24,7 +24,7 @@ flake8:
 	pipenv run flake8 hoard tests
 
 black:
-	pipenv run black -q --check hoard tests
+	pipenv run black --check --diff hoard tests
 
 safety:
 	pipenv check
