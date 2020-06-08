@@ -10,9 +10,13 @@ black = "==19.10b0"
 pytest-cov = "*"
 coveralls = "*"
 flake8 = "*"
+requests-mock = "*"
+flake8-bugbear = "*"
 
 [packages]
 click = "*"
+requests = "*"
+attrs = "*"
 
 [requires]
 python_version = "3.8"
