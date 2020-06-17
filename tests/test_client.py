@@ -3,7 +3,7 @@ import requests_mock
 
 from hoard.api import Api
 from hoard.client import Client, Transport, DataverseKey
-from hoard.models import create_from_dict, Dataset
+from hoard.models import create_from_dict
 
 
 @pytest.fixture
@@ -16,7 +16,7 @@ def response():
             "contactName": "Jane Doe",
             "contactEmail": "jane.doe@example.com",
             "description": "A hoard",
-            "subjects": ["stuff", "things"]
+            "subjects": ["stuff", "things"],
         }
     }
     return resp
