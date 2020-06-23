@@ -9,8 +9,12 @@ class Dataset:
         return attr.asdict(self)
 
 
-def create_from_dict(data: dict) -> Dataset:
-    title = data["data"]["latestVersion"]["metadataBlocks"]["citation"]["fields"][0][
+def create_whoas(item):
+    return Dataset(...)
+
+
+def create_rdr(item: dict) -> Dataset:
+    title = item["data"]["latestVersion"]["metadataBlocks"]["citation"]["fields"][0][
         "value"
     ]
     return Dataset(title=title)

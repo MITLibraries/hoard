@@ -1,9 +1,9 @@
-from typing import Tuple
+from typing import Any, Callable, Tuple
 
 import requests
 
 from hoard.api import Api
-from hoard.models import create_from_dict, Dataset
+from hoard.models import Dataset
 
 
 class Transport:
@@ -27,9 +27,12 @@ class DataverseKey:
 
 
 class Client:
-    def __init__(self, api: Api, transport: Transport) -> None:
+    def __init__(
+        self, api: Api, transport: Transport, factory: Callable[[Any], Dataset]
+    ) -> None:
         self.api = api
         self.transport = transport
+        self.factory = factory
 
     def get(self, *, pid: str = None, id: int = None) -> Dataset:
         if pid is not None:
@@ -39,7 +42,7 @@ class Client:
         else:
             raise Exception("You must supply either an id or a pid")
         resp = self.transport.send(req)
-        return create_from_dict(resp.json())
+        return self.factory(resp.json())
 
     def create(self, dataset: Dataset, parent: str = "root") -> Tuple[int, str]:
         req = self.api.create_dataset(parent, dataset.asdict())
