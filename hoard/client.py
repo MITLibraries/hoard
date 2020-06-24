@@ -42,7 +42,7 @@ class Client:
         return create_from_dict(resp.json()["data"])
 
     def create(self, dataset: Dataset, parent: str = "root") -> Tuple[int, str]:
-        req = self.api.create_dataset(parent, dataset.dv_format())
+        req = self.api.create_dataset(parent, dataset.asdict())
         resp = self.transport.send(req)
         data = resp.json()["data"]
         return data["id"], data["persistentId"]

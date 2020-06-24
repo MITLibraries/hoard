@@ -56,7 +56,7 @@ def test_client_creates_dataset(dataset):
         )
         client = Client(Api("http+mock://example.com/"), Transport())
         dv_id, p_id = client.create(dataset)
-    assert m.last_request.json() == dataset.dv_format()
+    assert m.last_request.json() == dataset.asdict()
     assert dv_id == 1
     assert p_id == "set1"
 

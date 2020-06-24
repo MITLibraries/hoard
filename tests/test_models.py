@@ -28,4 +28,4 @@ def test_dataset(record):
         subjects=["Medicine, Health and Life Sciences"],
         title="Darwin's Finches",
     )
-    assert new_record.dv_format() == record
+    assert new_record.asdict() == record

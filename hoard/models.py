@@ -33,9 +33,6 @@ class Dataset:
     title: str
 
     def asdict(self) -> dict:
-        return attr.asdict(self)
-
-    def dv_format(self) -> dict:
         fields = [primitive(self.title, "title")]
         fields.append(
             compound(
