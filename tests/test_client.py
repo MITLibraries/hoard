@@ -2,7 +2,7 @@ import pytest
 import requests_mock
 
 from hoard.api import Api
-from hoard.client import Client, Transport, DataverseKey
+from hoard.client import DataverseClient, Transport, DataverseKey
 from hoard.models import create_from_dict
 
 
@@ -31,9 +31,9 @@ def dataset(response):
 def test_client_gets_dataset_by_id(response):
     with requests_mock.Mocker() as m:
         m.get("http+mock://example.com/api/v1/datasets/666", json=response)
-        client = Client(Api("http+mock://example.com"), Transport())
+        client = DataverseClient(Api("http+mock://example.com"), Transport())
         dv = client.get(id=666)
-        assert dv.title == "The Hoard"
+        assert dv == response
 
 
 def test_client_gets_dataset_by_pid(response):
@@ -43,9 +43,9 @@ def test_client_gets_dataset_by_pid(response):
             "?persistentId=doi:foo/bar",
             json=response,
         )
-        client = Client(Api("http+mock://example.com"), Transport())
+        client = DataverseClient(Api("http+mock://example.com"), Transport())
         dv = client.get(pid="doi:foo/bar")
-        assert dv.title == "The Hoard"
+        assert dv == response
 
 
 def test_client_creates_dataset(dataset):
@@ -54,7 +54,7 @@ def test_client_creates_dataset(dataset):
             "http+mock://example.com/api/v1/root/datasets",
             json={"data": {"id": 1, "persistentId": "set1"}},
         )
-        client = Client(Api("http+mock://example.com/"), Transport())
+        client = DataverseClient(Api("http+mock://example.com/"), Transport())
         dv_id, p_id = client.create(dataset)
     assert m.last_request.json() == dataset.asdict()
     assert dv_id == 1
@@ -68,6 +68,6 @@ def test_client_adds_authentication(dataset):
             json={"data": {"id": 1, "persistentId": "set1"}},
         )
         api = Api("http+mock://example.com", DataverseKey("123"))
-        client = Client(api, Transport())
+        client = DataverseClient(api, Transport())
         client.create(dataset)
     assert m.last_request.headers["X-Dataverse-key"] == "123"
