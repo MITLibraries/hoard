@@ -1,11 +1,11 @@
 from typing import Iterator
 
-from hoard.client import DataverseClient, DSpaceClient
+from hoard.client import DataverseClient, DSpaceClient, OAIClient
 from hoard.models import Dataset
 
 
 class JPAL:
-    def __init__(self, client: DataverseClient) -> None:
+    def __init__(self, client: OAIClient) -> None:
         self.client = client
 
     def __iter__(self) -> Iterator[Dataset]:

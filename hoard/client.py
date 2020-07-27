@@ -50,3 +50,8 @@ class DataverseClient:
 
 class DSpaceClient:
     ...
+
+
+class OAIClient:
+    def __init__(self, url):
+        self.url = url
