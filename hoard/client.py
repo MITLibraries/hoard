@@ -1,6 +1,8 @@
 from typing import Iterator, Tuple
 
 import requests
+from sickle import Sickle
+from sickle.iterator import OAIItemIterator
 
 from hoard.api import Api
 from hoard.models import Dataset
@@ -53,11 +55,11 @@ class DSpaceClient:
 
 
 class OAIClient:
-    def __init__(self, url):
-        self.url = url
+    def __init__(self, source_url: str, format: str) -> None:
+        self.source_url = source_url
+        self.format = format
 
-    def __iter__(self) -> Iterator[str]:
-        return self
-
-    def __next__(self) -> str:
-        ...
+    def get(self) -> OAIItemIterator:
+        oai_recs = Sickle(self.source_url)
+        records = oai_recs.ListRecords(metadataPrefix=self.format)
+        return records

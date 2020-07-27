@@ -1,7 +1,8 @@
 import requests_mock
 
 from hoard.api import Api
-from hoard.client import DataverseClient, DataverseKey, Transport
+from hoard.client import DataverseClient, DataverseKey, OAIClient, Transport
+from hoard.models import create_from_dict
 
 
 def test_client_gets_dataset_by_id(dataverse_json_record):
@@ -47,3 +48,19 @@ def test_client_adds_authentication(dataset):
         client = DataverseClient(api, Transport())
         client.create(dataset)
     assert m.last_request.headers["X-Dataverse-key"] == "123"
+
+
+def test_oaiclient_get():
+    with requests_mock.Mocker() as m:
+        xml = "<OAI-PMH><ListRecords><record><header><identifier>1234"
+        xml += "</identifier></header><metadata><oai_dc:dc></oai_dc:dc>"
+        xml += "</metadata></record></ListRecords></OAI-PMH>"
+        full_url = "http+mock://example.com/oai?verb=ListRecords"
+        full_url += "&metadataPrefix=oai_dc"
+        m.get(full_url, text=xml)
+        source_url = "http+mock://example.com/oai"
+        format = "oai_dc"
+        client = OAIClient(source_url, format)
+        records = client.get()
+        for record in records:
+            assert record.header.identifier == '1234'
