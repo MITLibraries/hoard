@@ -18,6 +18,7 @@ click = "*"
 requests = "*"
 attrs = "*"
 bs4 = "*"
+sickle = "*"
 
 [requires]
 python_version = "3.8"
