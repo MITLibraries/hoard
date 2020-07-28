@@ -60,7 +60,7 @@ class OAIClient:
         self.format = format
         self.set = set
 
-    def get(self) -> str:
+    def get(self) -> Generator[int, float, str]:
         oai_recs = Sickle(self.source_url)
         params = {'metadataPrefix': self.format}
         if self.set is not None:

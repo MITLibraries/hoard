@@ -57,7 +57,7 @@ def test_oaiclient_get():
         ids_xml += '</header></ListIdentifiers></OAI-PMH>'
 
         ids_url = "http+mock://example.com/oai?verb=ListIdentifiers"
-        ids_url += "&metadataPrefix=oai_dc"
+        ids_url += "&metadataPrefix=oai_dc&set=testcollection"
 
         rec_url = "http+mock://example.com/oai?verb=GetRecord&identifier=1234"
         rec_url += "&metadataPrefix=oai_dc"
@@ -70,7 +70,8 @@ def test_oaiclient_get():
         m.get(rec_url, text=rec_xml)
         source_url = "http+mock://example.com/oai"
         format = "oai_dc"
-        client = OAIClient(source_url, format)
+        set = "testcollection"
+        client = OAIClient(source_url, format, set)
         records = client.get()
         for record in records:
             assert record.header.identifier == '1234'
