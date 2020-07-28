@@ -1,7 +1,7 @@
 from typing import Iterator, Tuple
 
 import requests
-from sickle import Sickle
+from sickle import Sickle # type: ignore
 from sickle.iterator import OAIItemIterator
 
 from hoard.api import Api
