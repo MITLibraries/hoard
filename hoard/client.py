@@ -55,11 +55,19 @@ class DSpaceClient:
 
 
 class OAIClient:
-    def __init__(self, source_url: str, format: str) -> None:
+    def __init__(self, source_url: str, format: str, set: str = None) -> None:
         self.source_url = source_url
         self.format = format
+        self.set = set
 
-    def get(self) -> OAIItemIterator:
+    def get(self) -> str:
         oai_recs = Sickle(self.source_url)
-        records = oai_recs.ListRecords(metadataPrefix=self.format)
-        return records
+        params = {'metadataPrefix': self.format}
+        if self.set is not None:
+            params['set'] = self.set
+        ids = oai_recs.ListIdentifiers(**params)
+        for id in ids:
+            record = oai_recs.GetRecord(identifier=id.identifier,
+                                        metadataPrefix=self.format)
+            if record.deleted is False:
+                yield record

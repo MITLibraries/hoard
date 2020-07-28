@@ -52,12 +52,22 @@ def test_client_adds_authentication(dataset):
 
 def test_oaiclient_get():
     with requests_mock.Mocker() as m:
-        xml = "<OAI-PMH><ListRecords><record><header><identifier>1234"
-        xml += "</identifier></header><metadata><oai_dc:dc></oai_dc:dc>"
-        xml += "</metadata></record></ListRecords></OAI-PMH>"
-        full_url = "http+mock://example.com/oai?verb=ListRecords"
-        full_url += "&metadataPrefix=oai_dc"
-        m.get(full_url, text=xml)
+        ids_xml = '<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
+        ids_xml += '<ListIdentifiers><header><identifier>1234</identifier>'
+        ids_xml += '</header></ListIdentifiers></OAI-PMH>'
+
+        ids_url = "http+mock://example.com/oai?verb=ListIdentifiers"
+        ids_url += "&metadataPrefix=oai_dc"
+
+        rec_url = "http+mock://example.com/oai?verb=GetRecord&identifier=1234"
+        rec_url += "&metadataPrefix=oai_dc"
+
+        rec_xml = "<OAI-PMH><ListRecords><record><header><identifier>1234"
+        rec_xml += "</identifier></header><metadata><oai_dc:dc></oai_dc:dc>"
+        rec_xml += "</metadata></record></ListRecords></OAI-PMH>"
+
+        m.get(ids_url, text=ids_xml)
+        m.get(rec_url, text=rec_xml)
         source_url = "http+mock://example.com/oai"
         format = "oai_dc"
         client = OAIClient(source_url, format)
