@@ -1,7 +1,10 @@
+from bs4 import BeautifulSoup  # type: ignore
+import requests
 from typing import Iterator
 
+
 from hoard.client import DataverseClient, DSpaceClient, OAIClient
-from hoard.models import Dataset
+from hoard.models import create_from_dataverse_json, Dataset
 
 
 class JPAL:
@@ -12,7 +15,12 @@ class JPAL:
         return self
 
     def __next__(self) -> Dataset:
-        ...
+        record = next(self.client)
+        xml = BeautifulSoup(record, "html.parser")
+        json_url = xml.metadata["directapicall"]
+        dataverse_json = requests.get(json_url).json()
+        dataset = create_from_dataverse_json(dataverse_json)
+        return dataset
 
 
 class RDR:

@@ -1,17 +1,13 @@
-import json
-import pytest
-
-from hoard.models import Author, Contact, Dataset, Description
-
-
-@pytest.fixture
-def record():
-    with open("fixtures/dataset-finch1.json") as f:
-        r = json.load(f)
-        return r
+from hoard.models import (
+    Author,
+    Contact,
+    create_from_dataverse_json,
+    Dataset,
+    Description,
+)
 
 
-def test_dataset(record):
+def test_dataset(dataverse_json_record):
     author = Author(authorName="Finch, Fiona", authorAffiliation="Birds Inc.")
     contact = Contact(
         datasetContactName="Finch, Fiona", datasetContactEmail="finch@mailinator.com"
@@ -28,4 +24,9 @@ def test_dataset(record):
         subjects=["Medicine, Health and Life Sciences"],
         title="Darwin's Finches",
     )
-    assert new_record.asdict() == record
+    assert new_record.asdict() == dataverse_json_record
+
+
+def test_create_dataset_from_dataverse_json(dataverse_json_record):
+    dataset = create_from_dataverse_json(dataverse_json_record)
+    assert dataset.asdict() == dataverse_json_record

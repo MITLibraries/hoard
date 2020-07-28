@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Iterator, Tuple
 
 import requests
 
@@ -55,3 +55,9 @@ class DSpaceClient:
 class OAIClient:
     def __init__(self, url):
         self.url = url
+
+    def __iter__(self) -> Iterator[str]:
+        return self
+
+    def __next__(self) -> str:
+        ...

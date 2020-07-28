@@ -1,51 +1,27 @@
-import pytest
 import requests_mock
 
 from hoard.api import Api
-from hoard.client import DataverseClient, Transport, DataverseKey
-from hoard.models import create_from_dict
+from hoard.client import DataverseClient, DataverseKey, Transport
 
 
-@pytest.fixture
-def response():
-    resp = {
-        "data": {
-            "title": "The Hoard",
-            "authorName": "Jane Doe",
-            "authorAffiliation": "Packrat University",
-            "contactName": "Jane Doe",
-            "contactEmail": "jane.doe@example.com",
-            "description": "A hoard",
-            "subjects": ["stuff", "things"],
-        }
-    }
-    return resp
-
-
-@pytest.fixture
-def dataset(response):
-    ds = create_from_dict(response["data"])
-    return ds
-
-
-def test_client_gets_dataset_by_id(response):
+def test_client_gets_dataset_by_id(dataverse_json_record):
     with requests_mock.Mocker() as m:
-        m.get("http+mock://example.com/api/v1/datasets/666", json=response)
+        m.get("http+mock://example.com/api/v1/datasets/666", json=dataverse_json_record)
         client = DataverseClient(Api("http+mock://example.com"), Transport())
         dv = client.get(id=666)
-        assert dv == response
+        assert dv == dataverse_json_record
 
 
-def test_client_gets_dataset_by_pid(response):
+def test_client_gets_dataset_by_pid(dataverse_json_record):
     with requests_mock.Mocker() as m:
         m.get(
             "http+mock://example.com/api/v1/datasets/:persistentId"
             "?persistentId=doi:foo/bar",
-            json=response,
+            json=dataverse_json_record,
         )
         client = DataverseClient(Api("http+mock://example.com"), Transport())
         dv = client.get(pid="doi:foo/bar")
-        assert dv == response
+        assert dv == dataverse_json_record
 
 
 def test_client_creates_dataset(dataset):
