@@ -62,9 +62,9 @@ def test_oaiclient_get():
         rec_url = "http+mock://example.com/oai?verb=GetRecord&identifier=1234"
         rec_url += "&metadataPrefix=oai_dc"
 
-        rec_xml = "<OAI-PMH><ListRecords><record><header><identifier>1234"
+        rec_xml = '<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><GetRecord><record><header><identifier>1234'
         rec_xml += "</identifier></header><metadata><oai_dc:dc></oai_dc:dc>"
-        rec_xml += "</metadata></record></ListRecords></OAI-PMH>"
+        rec_xml += "</metadata></record></GetRecord></OAI-PMH>"
 
         m.get(ids_url, text=ids_xml)
         m.get(rec_url, text=rec_xml)
