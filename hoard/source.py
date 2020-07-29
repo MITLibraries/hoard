@@ -10,6 +10,7 @@ from hoard.models import create_from_dataverse_json, Dataset
 class JPAL:
     def __init__(self, client: OAIClient) -> None:
         self.client = client
+        self.session = requests.Session()
 
     def __iter__(self) -> Iterator[Dataset]:
         return self
@@ -18,7 +19,7 @@ class JPAL:
         record = next(self.client)
         xml = BeautifulSoup(record, "html.parser")
         json_url = xml.metadata["directapicall"]
-        dataverse_json = requests.get(json_url).json()
+        dataverse_json = self.session.get(json_url).json()
         dataset = create_from_dataverse_json(dataverse_json)
         return dataset
 
