@@ -2,7 +2,6 @@ import requests_mock
 
 from hoard.api import Api
 from hoard.client import DataverseClient, DataverseKey, OAIClient, Transport
-from hoard.models import create_from_dict
 
 
 def test_client_gets_dataset_by_id(dataverse_json_record):

@@ -1,4 +1,4 @@
-from typing import Iterator, Tuple
+from typing import Iterator, Optional, Tuple
 
 import requests
 from sickle import Sickle  # type: ignore
@@ -58,7 +58,7 @@ class OAIClient:
         self.source_url = source_url
         self.format = format
         self.set = set
-        self.ids = None
+        self.ids: Optional[Iterator] = None
         client = Sickle(self.source_url)
         self.client = client
 
@@ -67,9 +67,7 @@ class OAIClient:
 
     def __next__(self) -> str:
         if self.ids is None:
-            self.fetch_ids()
-        if self.ids is None:
-            return ""
+            self.ids = self.fetch_ids()
         client = self.client
         while True:
             id = next(self.ids)
@@ -81,10 +79,10 @@ class OAIClient:
             else:
                 return record
 
-    def fetch_ids(self) -> None:
+    def fetch_ids(self) -> Iterator:
         client = self.client
         params = {"metadataPrefix": self.format}
         if self.set is not None:
             params["set"] = self.set
         ids = client.ListIdentifiers(**params)
-        self.ids = ids
+        return ids
