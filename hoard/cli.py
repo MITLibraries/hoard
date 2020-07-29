@@ -26,11 +26,12 @@ def main():
     help="URL for RDR. Records will be ingested into this system.",
 )
 def ingest(
-    source: str, source_url: str, key: Optional[str], url: str, parent: str
+    source: str, source_url: str, key: Optional[str], url: str, parent: str,
+    format: str, set: str
 ) -> None:
     rdr = DataverseClient(Api(url, DataverseKey(key)), Transport())
     if source == "jpal":
-        client = OAIClient(source_url)
+        client = OAIClient(source_url, format, set)
     records = JPAL(client)
     for record in records:
         rdr.create(record, parent=parent)

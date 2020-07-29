@@ -2,7 +2,7 @@ from typing import Iterator, Tuple
 
 import requests
 from sickle import Sickle # type: ignore
-from sickle.iterator import OAIItemIterator
+from sickle.iterator import OAIItemIterator # type: ignore
 
 from hoard.api import Api
 from hoard.models import Dataset
@@ -59,15 +59,33 @@ class OAIClient:
         self.source_url = source_url
         self.format = format
         self.set = set
-
-    def get(self) -> Generator[int, float, str]:
-        oai_recs = Sickle(self.source_url)
+        client = Sickle(self.source_url)
+        self.client = client
         params = {'metadataPrefix': self.format}
         if self.set is not None:
             params['set'] = self.set
-        ids = oai_recs.ListIdentifiers(**params)
-        for id in ids:
-            record = oai_recs.GetRecord(identifier=id.identifier,
-                                        metadataPrefix=self.format)
+        ids = client.ListIdentifiers(**params)
+        self.ids = ids
+
+    def __iter__(self) -> Iterator[str]:
+        return self
+
+    def __next__(self) -> str:
+        client = self.client
+        for id in self.ids:
+            record = client.GetRecord(identifier=id.identifier,
+                                      metadataPrefix=self.format)
             if record.deleted is False:
-                yield record
+                return record
+
+    # def get(self) -> Generator[int, float, str]:
+    #     client = Sickle(self.source_url)
+    #     params = {'metadataPrefix': self.format}
+    #     if self.set is not None:
+    #         params['set'] = self.set
+    #     ids = oai_recs.ListIdentifiers(**params)
+    #     for id in ids:
+    #         record = oai_recs.GetRecord(identifier=id.identifier,
+    #                                     metadataPrefix=self.format)
+    #         if record.deleted is False:
+    #             yield record

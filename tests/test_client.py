@@ -71,7 +71,6 @@ def test_oaiclient_get():
         source_url = "http+mock://example.com/oai"
         format = "oai_dc"
         set = "testcollection"
-        client = OAIClient(source_url, format, set)
-        records = client.get()
+        records = OAIClient(source_url, format, set)
         for record in records:
             assert record.header.identifier == '1234'
