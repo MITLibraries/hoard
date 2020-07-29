@@ -68,11 +68,14 @@ class OAIClient:
     def __next__(self) -> str:
         if self.ids is None:
             self.fetch_ids()
+        if self.ids is None:
+            return ""
         client = self.client
         while True:
             id = next(self.ids)
-            record = client.GetRecord(identifier=id.identifier,
-                                      metadataPrefix=self.format)
+            record = client.GetRecord(
+                identifier=id.identifier, metadataPrefix=self.format
+            )
             if record.deleted:
                 continue
             else:
@@ -80,20 +83,8 @@ class OAIClient:
 
     def fetch_ids(self) -> None:
         client = self.client
-        params = {'metadataPrefix': self.format}
+        params = {"metadataPrefix": self.format}
         if self.set is not None:
-            params['set'] = self.set
+            params["set"] = self.set
         ids = client.ListIdentifiers(**params)
         self.ids = ids
-
-    # def get(self) -> Generator[int, float, str]:
-    #     client = Sickle(self.source_url)
-    #     params = {'metadataPrefix': self.format}
-    #     if self.set is not None:
-    #         params['set'] = self.set
-    #     ids = oai_recs.ListIdentifiers(**params)
-    #     for id in ids:
-    #         record = oai_recs.GetRecord(identifier=id.identifier,
-    #                                     metadataPrefix=self.format)
-    #         if record.deleted is False:
-    #             yield record

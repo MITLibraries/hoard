@@ -54,8 +54,8 @@ def test_oaiclient_get():
     with requests_mock.Mocker() as m:
         ids_xml = '<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" \
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
-        ids_xml += '<ListIdentifiers><header><identifier>1234</identifier>'
-        ids_xml += '</header></ListIdentifiers></OAI-PMH>'
+        ids_xml += "<ListIdentifiers><header><identifier>1234</identifier>"
+        ids_xml += "</header></ListIdentifiers></OAI-PMH>"
 
         ids_url = "http+mock://example.com/oai?verb=ListIdentifiers"
         ids_url += "&metadataPrefix=oai_dc&set=testcollection"
@@ -76,4 +76,4 @@ def test_oaiclient_get():
         set = "testcollection"
         records = OAIClient(source_url, format, set)
         for record in records:
-            assert record.header.identifier == '1234'
+            assert record.header.identifier == "1234"

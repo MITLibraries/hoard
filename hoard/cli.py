@@ -26,8 +26,13 @@ def main():
     help="URL for RDR. Records will be ingested into this system.",
 )
 def ingest(
-    source: str, source_url: str, key: Optional[str], url: str, parent: str,
-    format: str, set: str
+    source: str,
+    source_url: str,
+    key: Optional[str],
+    url: str,
+    parent: str,
+    format: str,
+    set: str,
 ) -> None:
     rdr = DataverseClient(Api(url, DataverseKey(key)), Transport())
     if source == "jpal":
