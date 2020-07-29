@@ -52,7 +52,8 @@ def test_client_adds_authentication(dataset):
 
 def test_oaiclient_get():
     with requests_mock.Mocker() as m:
-        ids_xml = '<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
+        ids_xml = '<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" \
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
         ids_xml += '<ListIdentifiers><header><identifier>1234</identifier>'
         ids_xml += '</header></ListIdentifiers></OAI-PMH>'
 
@@ -62,7 +63,9 @@ def test_oaiclient_get():
         rec_url = "http+mock://example.com/oai?verb=GetRecord&identifier=1234"
         rec_url += "&metadataPrefix=oai_dc"
 
-        rec_xml = '<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><GetRecord><record><header><identifier>1234'
+        rec_xml = '<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"\
+        xmlns:xsi="http://www.w3.org/2001/XMLSchemainstance">\
+        <GetRecord><record><header><identifier>1234'
         rec_xml += "</identifier></header><metadata><oai_dc:dc></oai_dc:dc>"
         rec_xml += "</metadata></record></GetRecord></OAI-PMH>"
 
