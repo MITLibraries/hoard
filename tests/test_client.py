@@ -49,25 +49,14 @@ def test_client_adds_authentication(dataset):
     assert m.last_request.headers["X-Dataverse-key"] == "123"
 
 
-def test_oaiclient_get():
+def test_oaiclient_get(shared_datadir):
     with requests_mock.Mocker() as m:
-        ids_xml = '<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" \
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
-        ids_xml += "<ListIdentifiers><header><identifier>1234</identifier>"
-        ids_xml += "</header></ListIdentifiers></OAI-PMH>"
-
         ids_url = "http+mock://example.com/oai?verb=ListIdentifiers"
         ids_url += "&metadataPrefix=oai_dc&set=testcollection"
-
+        ids_xml = (shared_datadir / "OAI_ListIdentifiers.xml").read_text()
         rec_url = "http+mock://example.com/oai?verb=GetRecord&identifier=1234"
         rec_url += "&metadataPrefix=oai_dc"
-
-        rec_xml = '<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"\
-        xmlns:xsi="http://www.w3.org/2001/XMLSchemainstance">\
-        <GetRecord><record><header><identifier>1234'
-        rec_xml += "</identifier></header><metadata><oai_dc:dc></oai_dc:dc>"
-        rec_xml += "</metadata></record></GetRecord></OAI-PMH>"
-
+        rec_xml = (shared_datadir / "OAI_GetRecord.xml").read_text()
         m.get(ids_url, text=ids_xml)
         m.get(rec_url, text=rec_xml)
         source_url = "http+mock://example.com/oai"

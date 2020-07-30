@@ -12,6 +12,7 @@ coveralls = "*"
 flake8 = "*"
 requests-mock = "*"
 flake8-bugbear = "*"
+pytest-datadir = "*"
 
 [packages]
 click = "*"
