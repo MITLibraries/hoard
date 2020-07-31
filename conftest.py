@@ -27,10 +27,10 @@ def dataset():
 
 
 @pytest.fixture
-def dataverse_json_record():
-    with open("fixtures/dataset-finch1.json") as f:
-        r = json.load(f)
-        return r
+def dataverse_json_record(shared_datadir):
+    f = (shared_datadir / "dataset-finch1.json").read_text()
+    r = json.loads(f)
+    return r
 
 
 @pytest.fixture
