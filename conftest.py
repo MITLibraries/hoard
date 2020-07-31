@@ -27,13 +27,13 @@ def dataset():
 
 
 @pytest.fixture
-def dataverse_json_record():
-    with open("fixtures/dataset-finch1.json") as f:
-        r = json.load(f)
-        return r
+def dataverse_json_record(shared_datadir):
+    f = (shared_datadir / "dataset-finch1.json").read_text()
+    r = json.loads(f)
+    return r
 
 
 @pytest.fixture
-def dataverse_oai_xml_records():
-    records = ['<record><header><identifier>12345</identifier><datestamp>2020-01-01T01:01:11Z</datestamp><setSpec>cool_research_lab</setSpec></header><metadata directApiCall="http+mock://example.com/api/datasets/export?exporter=dataverse_json&persistentId=12345"/></record>']
+def dataverse_oai_xml_records(shared_datadir):
+    records = [(shared_datadir / 'OAI_Record.xml').read_text()]
     return records
