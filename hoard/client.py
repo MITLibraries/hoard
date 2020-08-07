@@ -76,9 +76,11 @@ class OAIClient:
             header_xml = next(self.ids)
             parsed_header = ET.fromstring(header_xml.raw)
             namespace = {"oai": "http://www.openarchives.org/OAI/2.0/"}
-            id = parsed_header.find("oai:identifier", namespace)
-            if hasattr(id, "text"):
-                id = id.text
+            id_elem = parsed_header.find("oai:identifier", namespace)
+            if id_elem is None:
+                raise Exception("No OAI identifier found")
+            else:
+                id = id_elem.text
             params = {
                 "verb": "GetRecord",
                 "metadataPrefix": self.format,
