@@ -64,4 +64,4 @@ def test_oaiclient_get(shared_datadir):
         set = "testcollection"
         records = OAIClient(source_url, format, set)
         for record in records:
-            assert record.header.identifier == "1234"
+            assert record == (shared_datadir / "OAI_GetRecord.xml").read_text()
