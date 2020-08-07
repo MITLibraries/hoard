@@ -88,15 +88,13 @@ class OAIClient:
             }
             record = session.get(self.source_url, params=params).text
             parsed_record = ET.fromstring(record)
-            for elem in [
-                e
-                for e in parsed_record.iter()
-                if e.tag == f"{{{namespace['oai']}}}header"
-            ]:
-                if "status" in elem.attrib and elem.attrib["status"] == "deleted":
-                    continue
-                else:
-                    return record
+            deleted = parsed_record.find(
+                ".//oai:header[@status='deleted']", namespaces=namespace
+            )
+            if deleted:
+                continue
+            else:
+                return record
 
     def fetch_ids(self) -> Iterator:
         client = self.client
