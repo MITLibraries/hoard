@@ -2,6 +2,7 @@ from typing import Iterator, Optional, Tuple
 
 import requests
 from sickle import Sickle  # type: ignore
+import xml.etree.ElementTree as ET
 
 from hoard.api import Api
 from hoard.models import Dataset
@@ -61,6 +62,8 @@ class OAIClient:
         self.ids: Optional[Iterator] = None
         client = Sickle(self.source_url)
         self.client = client
+        session = requests.Session()
+        self.session = session
 
     def __iter__(self) -> Iterator[str]:
         return self
@@ -68,16 +71,30 @@ class OAIClient:
     def __next__(self) -> str:
         if self.ids is None:
             self.ids = self.fetch_ids()
-        client = self.client
+        session = self.session
         while True:
-            id = next(self.ids)
-            record = client.GetRecord(
-                identifier=id.identifier, metadataPrefix=self.format
-            )
-            if record.deleted:
-                continue
-            else:
-                return record
+            header_xml = next(self.ids)
+            parsed_header = ET.fromstring(header_xml.raw)
+            namespace = {"oai": "http://www.openarchives.org/OAI/2.0/"}
+            id = parsed_header.find("oai:identifier", namespace)
+            if hasattr(id, "text"):
+                id = id.text
+            params = {
+                "verb": "GetRecord",
+                "metadataPrefix": self.format,
+                "identifier": id,
+            }
+            record = session.get(self.source_url, params=params).text
+            parsed_record = ET.fromstring(record)
+            for elem in [
+                e
+                for e in parsed_record.iter()
+                if e.tag == f"{{{namespace['oai']}}}header"
+            ]:
+                if "status" in elem.attrib and elem.attrib["status"] == "deleted":
+                    continue
+                else:
+                    return record
 
     def fetch_ids(self) -> Iterator:
         client = self.client
