@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2020-08-10T12:41:59Z</responseDate>
+  <request verb="ListRecords" metadataPrefix="dataverse_json" set="Jameel_Poverty_Action_Lab">https://dataverse.harvard.edu/oai</request>
+  <ListRecords>
+    <record>
+      <header status="deleted">
+        <identifier>doi:10.7910/DVN/16OAH0</identifier>
+        <datestamp>2019-08-20T07:15:11Z</datestamp>
+        <setSpec>Jameel_Poverty_Action_Lab</setSpec>
+      </header>
+    </record>
+    <record>
+      <header status="deleted">
+        <identifier>doi:10.7910/DVN/19PPE7</identifier>
+        <datestamp>2019-08-20T07:15:11Z</datestamp>
+        <setSpec>Jameel_Poverty_Action_Lab</setSpec>
+      </header>
+    </record>
+    <record>
+      <header status="deleted">
+        <identifier>doi:10.7910/DVN/2ELQNE</identifier>
+        <datestamp>2019-08-20T07:15:11Z</datestamp>
+        <setSpec>Jameel_Poverty_Action_Lab</setSpec>
+      </header>
+    </record>
+    <record>
+      <header status="deleted">
+        <identifier>doi:10.7910/DVN/4IYQLO</identifier>
+        <datestamp>2019-08-20T07:15:11Z</datestamp>
+        <setSpec>Jameel_Poverty_Action_Lab</setSpec>
+      </header>
+    </record>
+  </ListRecords>
+</OAI-PMH>
