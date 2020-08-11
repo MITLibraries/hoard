@@ -2,6 +2,7 @@ from hoard.models import (
     Author,
     Contact,
     create_from_dataverse_json,
+    create_from_dublin_core_xml,
     Dataset,
     Description,
 )
@@ -30,3 +31,11 @@ def test_dataset(dataverse_json_record):
 def test_create_dataset_from_dataverse_json(dataverse_json_record):
     dataset = create_from_dataverse_json(dataverse_json_record)
     assert dataset.asdict() == dataverse_json_record
+
+
+def test_create_dublin_core_xml(dspace_oai_xml_records):
+    dataset = create_from_dublin_core_xml(dspace_oai_xml_records[0])
+    assert (
+        dataset.title == "The Title"
+    )  # Not sure how deep we want to go with the testing
+    assert dataset.subjects == ["Subject 1"]

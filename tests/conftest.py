@@ -40,6 +40,12 @@ def dataverse_oai_xml_records(shared_datadir):
 
 
 @pytest.fixture
+def dspace_oai_xml_records(shared_datadir):
+    records = [(shared_datadir / "DSpace_OAI_Record.xml").read_text()]
+    return records
+
+
+@pytest.fixture
 def jpal_oai_server(requests_mock, shared_datadir, request):
     url = "http+mock://example.com/oai"
     records = {

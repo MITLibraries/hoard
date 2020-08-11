@@ -1,6 +1,7 @@
 from typing import Any, Dict, List, Optional
 
 import attr
+import xml.etree.ElementTree as ET
 
 
 @attr.s(auto_attribs=True)
@@ -74,6 +75,46 @@ class Dataset:
 
 
 # Helper functions
+def create_from_dublin_core_xml(data: str) -> Dataset:
+    record = ET.fromstring(data)
+    namespace = {
+        "oai": "http://www.openarchives.org/OAI/2.0/",
+        "dc": "http://purl.org/dc/elements/1.1/",
+    }
+    title_elem = record.find(".//dc:title", namespace)
+    if title_elem is not None and title_elem.text is not None:
+        title = title_elem.text
+    else:
+        raise Exception("No title field")
+    for x in record.findall(".//dc:creator", namespace):
+        if x.text is not None:
+            authors = [Author(authorName=x.text, authorAffiliation="")]
+        else:
+            raise Exception("No author field")
+    contacts = [
+        Contact(
+            datasetContactName="NAME, FAKE",
+            datasetContactEmail="FAKE_EMAIL@FAKE_DOMAIN.EDU",
+        )
+    ]  # Replace later
+    for x in record.findall(".//dc:description", namespace):
+        if x.text is not None:
+            descriptions = [Description(dsDescriptionValue=x.text)]
+        else:
+            raise Exception("No description field")
+    for x in record.findall(".//dc:subject", namespace):
+        if x.text is not None:
+            subjects = [x.text]
+        else:
+            raise Exception("No subject field")
+
+    return Dataset(
+        title=title,
+        authors=authors,
+        contacts=contacts,
+        description=descriptions,
+        subjects=subjects,
+    )
 
 
 def create_from_dataverse_json(data: dict) -> Dataset:

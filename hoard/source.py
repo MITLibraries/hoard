@@ -3,8 +3,12 @@ import requests
 from typing import Iterator, TextIO
 
 
-from hoard.client import DataverseClient, DSpaceClient, OAIClient
-from hoard.models import create_from_dataverse_json, Dataset
+from hoard.client import DataverseClient, OAIClient
+from hoard.models import (
+    create_from_dataverse_json,
+    create_from_dublin_core_xml,
+    Dataset,
+)
 
 
 class JPAL:
@@ -36,14 +40,16 @@ class RDR:
 
 
 class WHOAS:
-    def __init__(self, client: DSpaceClient) -> None:
+    def __init__(self, client: OAIClient) -> None:
         self.client = client
 
     def __iter__(self) -> Iterator[Dataset]:
         return self
 
     def __next__(self) -> Dataset:
-        ...
+        record = next(self.client)
+        dataset = create_from_dublin_core_xml(record)
+        return dataset
 
 
 class LincolnLab:
