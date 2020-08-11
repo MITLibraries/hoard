@@ -1,0 +1,265 @@
+{
+  "id": 3148710,
+  "identifier": "DVN/2ELQNE",
+  "persistentUrl": "https://doi.org/10.7910/DVN/2ELQNE",
+  "protocol": "doi",
+  "authority": "10.7910",
+  "publisher": "Harvard Dataverse",
+  "publicationDate": "2018-05-03",
+  "storageIdentifier": "s3://10.7910/DVN/2ELQNE",
+  "datasetVersion": {
+    "id": 139859,
+    "datasetId": 3148710,
+    "datasetPersistentId": "doi:10.7910/DVN/2ELQNE",
+    "storageIdentifier": "s3://10.7910/DVN/2ELQNE",
+    "versionNumber": 1,
+    "versionMinorNumber": 1,
+    "versionState": "RELEASED",
+    "lastUpdateTime": "2018-07-25T17:51:58Z",
+    "releaseTime": "2018-07-25T17:51:58Z",
+    "createTime": "2018-07-25T17:51:51Z",
+    "license": "CC0",
+    "termsOfUse": "CC0 Waiver",
+    "fileAccessRequest": false,
+    "metadataBlocks": {
+      "citation": {
+        "displayName": "Citation Metadata",
+        "fields": [
+          {
+            "typeName": "title",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "Replication Data for: Governance and the effectiveness of public health subsidies: Evidence from Ghana, Kenya and Uganda"
+          },
+          {
+            "typeName": "author",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+              {
+                "authorName": {
+                  "typeName": "authorName",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Dizon-Ross, Rebecca"
+                },
+                "authorAffiliation": {
+                  "typeName": "authorAffiliation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "University of Chicago Booth School of Business"
+                }
+              },
+              {
+                "authorName": {
+                  "typeName": "authorName",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Dupas, Pascaline"
+                },
+                "authorAffiliation": {
+                  "typeName": "authorAffiliation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Stanford University"
+                },
+                "authorIdentifierScheme": {
+                  "typeName": "authorIdentifierScheme",
+                  "multiple": false,
+                  "typeClass": "controlledVocabulary",
+                  "value": "ORCID"
+                },
+                "authorIdentifier": {
+                  "typeName": "authorIdentifier",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "0000-0003-0140-9417"
+                }
+              },
+              {
+                "authorName": {
+                  "typeName": "authorName",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Robinson, Jonathan"
+                },
+                "authorAffiliation": {
+                  "typeName": "authorAffiliation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "University of California at Santa Cruz"
+                }
+              }
+            ]
+          },
+          {
+            "typeName": "datasetContact",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+              {
+                "datasetContactName": {
+                  "typeName": "datasetContactName",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Dizon-Ross, Rebecca"
+                },
+                "datasetContactAffiliation": {
+                  "typeName": "datasetContactAffiliation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "University of Chicago"
+                },
+                "datasetContactEmail": {
+                  "typeName": "datasetContactEmail",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "rdr@chicagobooth.edu"
+                }
+              },
+              {
+                "datasetContactName": {
+                  "typeName": "datasetContactName",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Dupas, Pascaline"
+                },
+                "datasetContactAffiliation": {
+                  "typeName": "datasetContactAffiliation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Stanford University"
+                },
+                "datasetContactEmail": {
+                  "typeName": "datasetContactEmail",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "pdupas@stanford.edu"
+                }
+              },
+              {
+                "datasetContactName": {
+                  "typeName": "datasetContactName",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Robinson, Jonathan"
+                },
+                "datasetContactAffiliation": {
+                  "typeName": "datasetContactAffiliation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "University of California at Santa Cruz"
+                },
+                "datasetContactEmail": {
+                  "typeName": "datasetContactEmail",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "jmrtwo@ucsc.edu"
+                }
+              }
+            ]
+          },
+          {
+            "typeName": "dsDescription",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+              {
+                "dsDescriptionValue": {
+                  "typeName": "dsDescriptionValue",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Distributing subsidized health products through existing health infrastructure could substantially and cost-effectively improve health in sub-Saharan Africa. There is, however, widespread concern that poor gov- ernance – in particular, limited health worker accountability – seriously undermines the effectiveness of subsidy programs. We audit targeted bed net distribution programs to quantify the extent of agency prob- lems. We find that around 80% of the eligible receive the subsidy as intended, and up to 15% of subsidies are leaked to ineligible people. Supplementing the program with simple financial or monitoring incentives for health workers does not improve performance further and is thus not cost-effective in this context."
+                },
+                "dsDescriptionDate": {
+                  "typeName": "dsDescriptionDate",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "2018-05-01"
+                }
+              }
+            ]
+          },
+          {
+            "typeName": "subject",
+            "multiple": true,
+            "typeClass": "controlledVocabulary",
+            "value": [
+              "Social Sciences"
+            ]
+          },
+          {
+            "typeName": "publication",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+              {
+                "publicationCitation": {
+                  "typeName": "publicationCitation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Rebecca Dizon-Ross, Pascaline Dupas, Jonathan Robinson,\r\nGovernance and the effectiveness of public health subsidies: Evidence from Ghana, Kenya and Uganda. Journal of Public Economics, Volume 156, 2017, Pages 150-169. ISSN 0047-2727. https://doi.org/10.1016/j.jpubeco.2017.09.005"
+                },
+                "publicationIDType": {
+                  "typeName": "publicationIDType",
+                  "multiple": false,
+                  "typeClass": "controlledVocabulary",
+                  "value": "doi"
+                },
+                "publicationIDNumber": {
+                  "typeName": "publicationIDNumber",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "10.1016/j.jpubeco.2017.09.005"
+                },
+                "publicationURL": {
+                  "typeName": "publicationURL",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "https://doi.org/10.1016/j.jpubeco.2017.09.005"
+                }
+              }
+            ]
+          },
+          {
+            "typeName": "depositor",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "Carlos, Marisa"
+          },
+          {
+            "typeName": "dateOfDeposit",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "2018-05-01"
+          }
+        ]
+      }
+    },
+    "files": [
+      {
+        "label": "EDHEP_Replication_Files.zip",
+        "restricted": false,
+        "version": 1,
+        "datasetVersionId": 139859,
+        "dataFile": {
+          "id": 3148711,
+          "persistentId": "doi:10.7910/DVN/2ELQNE/QNXOSM",
+          "pidURL": "https://doi.org/10.7910/DVN/2ELQNE/QNXOSM",
+          "filename": "EDHEP_Replication_Files.zip",
+          "contentType": "application/zip",
+          "filesize": 3257829,
+          "storageIdentifier": "s3://dvn-cloud:1631d48aaa4-cb004d8c1d3f",
+          "rootDataFileId": -1,
+          "md5": "d55e7cc2b9f42b73dc3e882cb273e904",
+          "checksum": {
+            "type": "MD5",
+            "value": "d55e7cc2b9f42b73dc3e882cb273e904"
+          },
+          "creationDate": "2018-05-01"
+        }
+      }
+    ],
+    "citation": "Dizon-Ross, Rebecca; Dupas, Pascaline; Robinson, Jonathan, 2018, \"Replication Data for: Governance and the effectiveness of public health subsidies: Evidence from Ghana, Kenya and Uganda\", https://doi.org/10.7910/DVN/2ELQNE, Harvard Dataverse, V1"
+  }
+}

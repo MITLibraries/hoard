@@ -49,19 +49,8 @@ def test_client_adds_authentication(dataset):
     assert m.last_request.headers["X-Dataverse-key"] == "123"
 
 
-def test_oaiclient_get(shared_datadir):
-    with requests_mock.Mocker() as m:
-        ids_url = "http+mock://example.com/oai?verb=ListIdentifiers"
-        ids_url += "&metadataPrefix=oai_dc&set=testcollection"
-        ids_xml = (shared_datadir / "OAI_ListIdentifiers.xml").read_text()
-        rec_url = "http+mock://example.com/oai?verb=GetRecord&identifier=1234"
-        rec_url += "&metadataPrefix=oai_dc"
-        rec_xml = (shared_datadir / "OAI_GetRecord.xml").read_text()
-        m.get(ids_url, text=ids_xml)
-        m.get(rec_url, text=rec_xml)
-        source_url = "http+mock://example.com/oai"
-        format = "oai_dc"
-        set = "testcollection"
-        records = OAIClient(source_url, format, set)
-        for record in records:
-            assert record == (shared_datadir / "OAI_GetRecord.xml").read_text()
+def test_oaiclient_iterates_over_records(jpal_oai_server):
+    records = OAIClient(
+        "http+mock://example.com/oai", "dataverse_json", "Jameel_Poverty_Action_Lab"
+    )
+    assert list(records) == jpal_oai_server

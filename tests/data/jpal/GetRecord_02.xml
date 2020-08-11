@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2020-08-10T12:44:22Z</responseDate>
+  <request verb="GetRecord" identifier="doi:10.7910/DVN/19PPE7" metadataPrefix="dataverse_json">https://dataverse.harvard.edu/oai</request>
+  <GetRecord>
+    <record>
+      <header>
+        <identifier>doi:10.7910/DVN/19PPE7</identifier>
+        <datestamp>2020-04-17T07:08:11Z</datestamp>
+        <setSpec>Jameel_Poverty_Action_Lab</setSpec>
+        <setSpec>IQSS</setSpec>
+      </header>
+      <metadata directApiCall="http+mock://example.com/api/datasets/export?exporter=dataverse_json&amp;persistentId=doi:10.7910/DVN/19PPE7"/>
+    </record>
+  </GetRecord>
+</OAI-PMH>

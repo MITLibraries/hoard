@@ -25,18 +25,23 @@ def main():
     default="http://localhost",
     help="URL for RDR. Records will be ingested into this system.",
 )
+@click.option("--verbose", "-v", is_flag=True)
 def ingest(
     source: str,
     source_url: str,
     key: Optional[str],
     url: str,
     parent: str,
-    format: str,
-    set: str,
+    verbose: bool,
 ) -> None:
+    count = 0
     rdr = DataverseClient(Api(url, DataverseKey(key)), Transport())
     if source == "jpal":
-        client = OAIClient(source_url, format, set)
+        client = OAIClient(source_url, "dataverse_json", "Jameel_Poverty_Action_Lab")
     records = JPAL(client)
     for record in records:
-        rdr.create(record, parent=parent)
+        dv_id, p_id = rdr.create(record, parent=parent)
+        if verbose:
+            click.echo(f"Created {p_id}")
+        count += 1
+    click.echo(f"{count} records ingested from {source}")

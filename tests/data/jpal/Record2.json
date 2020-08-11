@@ -1,0 +1,482 @@
+{
+  "id": 3003481,
+  "identifier": "DVN/19PPE7",
+  "persistentUrl": "https://doi.org/10.7910/DVN/19PPE7",
+  "protocol": "doi",
+  "authority": "10.7910",
+  "publisher": "Harvard Dataverse",
+  "publicationDate": "2017-02-27",
+  "storageIdentifier": "s3://10.7910/DVN/19PPE7",
+  "datasetVersion": {
+    "id": 139809,
+    "datasetId": 3003481,
+    "datasetPersistentId": "doi:10.7910/DVN/19PPE7",
+    "storageIdentifier": "s3://10.7910/DVN/19PPE7",
+    "versionNumber": 1,
+    "versionMinorNumber": 2,
+    "versionState": "RELEASED",
+    "lastUpdateTime": "2019-06-24T19:58:42Z",
+    "releaseTime": "2019-06-24T19:58:42Z",
+    "createTime": "2018-07-24T15:03:21Z",
+    "license": "CC0",
+    "termsOfUse": "CC0 Waiver",
+    "fileAccessRequest": false,
+    "metadataBlocks": {
+      "citation": {
+        "displayName": "Citation Metadata",
+        "fields": [
+          {
+            "typeName": "title",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "The Impact of Maternal Literacy and Participation Programs: Evidence from a Randomized Evaluation in India"
+          },
+          {
+            "typeName": "author",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+              {
+                "authorName": {
+                  "typeName": "authorName",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Banerji, Rukmini"
+                },
+                "authorAffiliation": {
+                  "typeName": "authorAffiliation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Pratham and ASER Centre"
+                }
+              },
+              {
+                "authorName": {
+                  "typeName": "authorName",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Berry, James"
+                },
+                "authorAffiliation": {
+                  "typeName": "authorAffiliation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "University of Delaware"
+                }
+              },
+              {
+                "authorName": {
+                  "typeName": "authorName",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Shotland, Marc"
+                },
+                "authorAffiliation": {
+                  "typeName": "authorAffiliation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Abdul Latif Jameel Poverty Action Lab"
+                }
+              }
+            ]
+          },
+          {
+            "typeName": "datasetContact",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+              {
+                "datasetContactName": {
+                  "typeName": "datasetContactName",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Banerji, Rukmini"
+                },
+                "datasetContactAffiliation": {
+                  "typeName": "datasetContactAffiliation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Pratham and ASER Centre"
+                },
+                "datasetContactEmail": {
+                  "typeName": "datasetContactEmail",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "rukmini.banerji@pratham.org"
+                }
+              },
+              {
+                "datasetContactName": {
+                  "typeName": "datasetContactName",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Berry, James"
+                },
+                "datasetContactAffiliation": {
+                  "typeName": "datasetContactAffiliation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "University of Delaware"
+                },
+                "datasetContactEmail": {
+                  "typeName": "datasetContactEmail",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "jimberry@udel.edu"
+                }
+              },
+              {
+                "datasetContactName": {
+                  "typeName": "datasetContactName",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Shotland, Marc"
+                },
+                "datasetContactAffiliation": {
+                  "typeName": "datasetContactAffiliation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Abdul Latif Jameel Poverty Action Lab"
+                },
+                "datasetContactEmail": {
+                  "typeName": "datasetContactEmail",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "shotland@mit.edu"
+                }
+              }
+            ]
+          },
+          {
+            "typeName": "dsDescription",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+              {
+                "dsDescriptionValue": {
+                  "typeName": "dsDescriptionValue",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Using a randomized field experiment in India, we evaluate the effectiveness of adult literacy and parental involvement interventions in improving children's learning. Households were assigned to receive either adult literacy (language and math) classes for mothers, training for mothers on how to enhance their children's learning at home, or a combination of the two programs. All three interventions had significant but modest impacts on childrens math scores. The interventions also increased mothers' test scores in both language and math, as well as a range of other outcomes reflecting greater involvement of mothers in their children's education."
+                }
+              }
+            ]
+          },
+          {
+            "typeName": "subject",
+            "multiple": true,
+            "typeClass": "controlledVocabulary",
+            "value": [
+              "Social Sciences"
+            ]
+          },
+          {
+            "typeName": "keyword",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+              {
+                "keywordValue": {
+                  "typeName": "keywordValue",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Adult education, education inputs, field experiments"
+                }
+              }
+            ]
+          },
+          {
+            "typeName": "publication",
+            "multiple": true,
+            "typeClass": "compound",
+            "value": [
+              {
+                "publicationCitation": {
+                  "typeName": "publicationCitation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "Banerji, Rukmini, James Berry, and Marc Shotland. 2017. \"The Impact of Maternal Literacy and Participation Programs: Evidence from a Randomized Evaluation in India.\" American Economic Journal: Applied Economics, 9(4): 303-37."
+                },
+                "publicationIDType": {
+                  "typeName": "publicationIDType",
+                  "multiple": false,
+                  "typeClass": "controlledVocabulary",
+                  "value": "doi"
+                },
+                "publicationIDNumber": {
+                  "typeName": "publicationIDNumber",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "10.1257/app.20150390"
+                },
+                "publicationURL": {
+                  "typeName": "publicationURL",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "https://www.aeaweb.org/articles?id=10.1257/app.20150390"
+                }
+              }
+            ]
+          },
+          {
+            "typeName": "depositor",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "Rubio, Karl"
+          },
+          {
+            "typeName": "dateOfDeposit",
+            "multiple": false,
+            "typeClass": "primitive",
+            "value": "2017-02-27"
+          }
+        ]
+      }
+    },
+    "files": [
+      {
+        "label": "baseline all instruments.xlsx",
+        "restricted": false,
+        "version": 1,
+        "datasetVersionId": 139809,
+        "dataFile": {
+          "id": 3003487,
+          "persistentId": "doi:10.7910/DVN/19PPE7/Q0TLKT",
+          "pidURL": "https://doi.org/10.7910/DVN/19PPE7/Q0TLKT",
+          "filename": "baseline all instruments.xlsx",
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "filesize": 124903,
+          "storageIdentifier": "s3://dvn-cloud:15a81834344-a001f698429a",
+          "rootDataFileId": -1,
+          "md5": "e8ef808f05b5657e871b35cc7e589ec7",
+          "checksum": {
+            "type": "MD5",
+            "value": "e8ef808f05b5657e871b35cc7e589ec7"
+          },
+          "creationDate": "2017-02-27"
+        }
+      },
+      {
+        "label": "baseline_oaser_tool.pdf",
+        "restricted": false,
+        "version": 1,
+        "datasetVersionId": 139809,
+        "dataFile": {
+          "id": 3003485,
+          "persistentId": "doi:10.7910/DVN/19PPE7/XEQ0LY",
+          "pidURL": "https://doi.org/10.7910/DVN/19PPE7/XEQ0LY",
+          "filename": "baseline_oaser_tool.pdf",
+          "contentType": "application/pdf",
+          "filesize": 48958,
+          "storageIdentifier": "s3://dvn-cloud:15a81834499-882c7d4c74b1",
+          "rootDataFileId": -1,
+          "md5": "06de0f87e563351c2d91360d42b16d68",
+          "checksum": {
+            "type": "MD5",
+            "value": "06de0f87e563351c2d91360d42b16d68"
+          },
+          "creationDate": "2017-02-27"
+        }
+      },
+      {
+        "label": "baseline_testingtool.pdf",
+        "restricted": false,
+        "version": 1,
+        "datasetVersionId": 139809,
+        "dataFile": {
+          "id": 3003488,
+          "persistentId": "doi:10.7910/DVN/19PPE7/FUZROT",
+          "pidURL": "https://doi.org/10.7910/DVN/19PPE7/FUZROT",
+          "filename": "baseline_testingtool.pdf",
+          "contentType": "application/pdf",
+          "filesize": 199070,
+          "storageIdentifier": "s3://dvn-cloud:15a818347a3-7389b40f383d",
+          "rootDataFileId": -1,
+          "md5": "3a230dff9e9395ac6b3a8331c1f87ffc",
+          "checksum": {
+            "type": "MD5",
+            "value": "3a230dff9e9395ac6b3a8331c1f87ffc"
+          },
+          "creationDate": "2017-02-27"
+        }
+      },
+      {
+        "label": "endline all instruments.xlsx",
+        "restricted": false,
+        "version": 1,
+        "datasetVersionId": 139809,
+        "dataFile": {
+          "id": 3003492,
+          "persistentId": "doi:10.7910/DVN/19PPE7/GQRKQF",
+          "pidURL": "https://doi.org/10.7910/DVN/19PPE7/GQRKQF",
+          "filename": "endline all instruments.xlsx",
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "filesize": 186674,
+          "storageIdentifier": "s3://dvn-cloud:15a81834a7d-89a4d4de3880",
+          "rootDataFileId": -1,
+          "md5": "f149d190c278b9c3824faefc3c4fb6e4",
+          "checksum": {
+            "type": "MD5",
+            "value": "f149d190c278b9c3824faefc3c4fb6e4"
+          },
+          "creationDate": "2017-02-27"
+        }
+      },
+      {
+        "label": "endline_testingtool.pdf",
+        "restricted": false,
+        "version": 1,
+        "datasetVersionId": 139809,
+        "dataFile": {
+          "id": 3003484,
+          "persistentId": "doi:10.7910/DVN/19PPE7/IQBHDS",
+          "pidURL": "https://doi.org/10.7910/DVN/19PPE7/IQBHDS",
+          "filename": "endline_testingtool.pdf",
+          "contentType": "application/pdf",
+          "filesize": 139605,
+          "storageIdentifier": "s3://dvn-cloud:15a81834c7a-38c28eee4706",
+          "rootDataFileId": -1,
+          "md5": "40e0591e362b19ba73271386d5f9594c",
+          "checksum": {
+            "type": "MD5",
+            "value": "40e0591e362b19ba73271386d5f9594c"
+          },
+          "creationDate": "2017-02-27"
+        }
+      },
+      {
+        "label": "genvar.do",
+        "restricted": false,
+        "version": 1,
+        "datasetVersionId": 139809,
+        "dataFile": {
+          "id": 3003482,
+          "persistentId": "doi:10.7910/DVN/19PPE7/IFDMJ4",
+          "pidURL": "https://doi.org/10.7910/DVN/19PPE7/IFDMJ4",
+          "filename": "genvar.do",
+          "contentType": "application/x-stata-syntax",
+          "filesize": 97304,
+          "storageIdentifier": "s3://dvn-cloud:15a81834fd2-623f0ae29f25",
+          "rootDataFileId": -1,
+          "md5": "9d0ba996fe371c1db36b195ccd48bf5d",
+          "checksum": {
+            "type": "MD5",
+            "value": "9d0ba996fe371c1db36b195ccd48bf5d"
+          },
+          "creationDate": "2017-02-27"
+        }
+      },
+      {
+        "label": "ml_admin_stats_raw.dta",
+        "restricted": false,
+        "version": 1,
+        "datasetVersionId": 139809,
+        "dataFile": {
+          "id": 3003491,
+          "persistentId": "doi:10.7910/DVN/19PPE7/3QOPQX",
+          "pidURL": "https://doi.org/10.7910/DVN/19PPE7/3QOPQX",
+          "filename": "ml_admin_stats_raw.dta",
+          "contentType": "application/x-stata",
+          "filesize": 9907,
+          "storageIdentifier": "s3://dvn-cloud:15a8183516b-8cbe279802f2",
+          "rootDataFileId": -1,
+          "md5": "0151a3d9c5e47e2d74ce3cdcb01d96c2",
+          "checksum": {
+            "type": "MD5",
+            "value": "0151a3d9c5e47e2d74ce3cdcb01d96c2"
+          },
+          "creationDate": "2017-02-27"
+        }
+      },
+      {
+        "label": "ml_merged.dta",
+        "restricted": false,
+        "version": 1,
+        "datasetVersionId": 139809,
+        "dataFile": {
+          "id": 3003489,
+          "persistentId": "doi:10.7910/DVN/19PPE7/2SATMH",
+          "pidURL": "https://doi.org/10.7910/DVN/19PPE7/2SATMH",
+          "filename": "ml_merged.dta",
+          "contentType": "application/x-stata",
+          "filesize": 178534602,
+          "storageIdentifier": "s3://dvn-cloud:15a81836bba-c1e8f859d5b2",
+          "rootDataFileId": -1,
+          "md5": "f3ee09c286b6f4b46c0a86fbe0aae36c",
+          "checksum": {
+            "type": "MD5",
+            "value": "f3ee09c286b6f4b46c0a86fbe0aae36c"
+          },
+          "creationDate": "2017-02-27"
+        }
+      },
+      {
+        "label": "ml_replication.zip",
+        "restricted": false,
+        "version": 1,
+        "datasetVersionId": 139809,
+        "dataFile": {
+          "id": 3003486,
+          "persistentId": "doi:10.7910/DVN/19PPE7/J3G3QH",
+          "pidURL": "https://doi.org/10.7910/DVN/19PPE7/J3G3QH",
+          "filename": "ml_replication.zip",
+          "contentType": "application/zip",
+          "filesize": 4032103,
+          "storageIdentifier": "s3://dvn-cloud:15a81837705-85054d7a6f0c",
+          "rootDataFileId": -1,
+          "md5": "0bf0b05bab4092addea97a84e0421df9",
+          "checksum": {
+            "type": "MD5",
+            "value": "0bf0b05bab4092addea97a84e0421df9"
+          },
+          "creationDate": "2017-02-27"
+        }
+      },
+      {
+        "label": "perception_tools.pdf",
+        "restricted": false,
+        "version": 1,
+        "datasetVersionId": 139809,
+        "dataFile": {
+          "id": 3003483,
+          "persistentId": "doi:10.7910/DVN/19PPE7/LIFMHX",
+          "pidURL": "https://doi.org/10.7910/DVN/19PPE7/LIFMHX",
+          "filename": "perception_tools.pdf",
+          "contentType": "application/pdf",
+          "filesize": 43589,
+          "storageIdentifier": "s3://dvn-cloud:15a818378a5-714c9ac20487",
+          "rootDataFileId": -1,
+          "md5": "82832cc6f6331cdd0822450cdac0cffd",
+          "checksum": {
+            "type": "MD5",
+            "value": "82832cc6f6331cdd0822450cdac0cffd"
+          },
+          "creationDate": "2017-02-27"
+        }
+      },
+      {
+        "label": "readme_ml_dataverse.pdf",
+        "restricted": false,
+        "version": 1,
+        "datasetVersionId": 139809,
+        "dataFile": {
+          "id": 3003490,
+          "persistentId": "doi:10.7910/DVN/19PPE7/SSTNAJ",
+          "pidURL": "https://doi.org/10.7910/DVN/19PPE7/SSTNAJ",
+          "filename": "readme_ml_dataverse.pdf",
+          "contentType": "application/pdf",
+          "filesize": 15697,
+          "storageIdentifier": "s3://dvn-cloud:15a81837c0a-b24f65254f64",
+          "rootDataFileId": -1,
+          "md5": "d0dfd78a917ab0c6028cea80be5d79fa",
+          "checksum": {
+            "type": "MD5",
+            "value": "d0dfd78a917ab0c6028cea80be5d79fa"
+          },
+          "creationDate": "2017-02-27"
+        }
+      }
+    ],
+    "citation": "Banerji, Rukmini; Berry, James; Shotland, Marc, 2017, \"The Impact of Maternal Literacy and Participation Programs: Evidence from a Randomized Evaluation in India\", https://doi.org/10.7910/DVN/19PPE7, Harvard Dataverse, V1"
+  }
+}
