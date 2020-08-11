@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup  # type: ignore
 import requests
-from typing import Iterator
+from typing import Iterator, TextIO
 
 
 from hoard.client import DataverseClient, DSpaceClient, OAIClient
@@ -38,6 +38,17 @@ class RDR:
 class WHOAS:
     def __init__(self, client: DSpaceClient) -> None:
         self.client = client
+
+    def __iter__(self) -> Iterator[Dataset]:
+        return self
+
+    def __next__(self) -> Dataset:
+        ...
+
+
+class LincolnLab:
+    def __init__(self, stream: TextIO) -> None:
+        self.stream = stream
 
     def __iter__(self) -> Iterator[Dataset]:
         return self

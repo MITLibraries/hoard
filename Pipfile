@@ -20,6 +20,7 @@ requests = "*"
 attrs = "*"
 bs4 = "*"
 sickle = "*"
+smart-open = {extras = ["aws"], version = "*"}
 
 [requires]
 python_version = "3.8"
