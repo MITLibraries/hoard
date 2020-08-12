@@ -84,29 +84,24 @@ def create_from_dublin_core_xml(data: str) -> Dataset:
     title_elem = record.find(".//dc:title", namespace)
     if title_elem is not None and title_elem.text is not None:
         title = title_elem.text
-    else:
-        raise Exception("No title field")
+    authors = []
     for x in record.findall(".//dc:creator", namespace):
         if x.text is not None:
-            authors = [Author(authorName=x.text, authorAffiliation="")]
-        else:
-            raise Exception("No author field")
+            authors.append(Author(authorName=x.text, authorAffiliation=""))
     contacts = [
         Contact(
             datasetContactName="NAME, FAKE",
             datasetContactEmail="FAKE_EMAIL@FAKE_DOMAIN.EDU",
         )
     ]  # Replace later
+    descriptions = []
     for x in record.findall(".//dc:description", namespace):
         if x.text is not None:
-            descriptions = [Description(dsDescriptionValue=x.text)]
-        else:
-            raise Exception("No description field")
+            descriptions.append(Description(dsDescriptionValue=x.text))
+    subjects = []
     for x in record.findall(".//dc:subject", namespace):
         if x.text is not None:
-            subjects = [x.text]
-        else:
-            raise Exception("No subject field")
+            subjects.append(x.text)
 
     return Dataset(
         title=title,
