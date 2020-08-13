@@ -40,6 +40,12 @@ def dataverse_oai_xml_records(shared_datadir):
 
 
 @pytest.fixture
+def dspace_oai_xml_records(shared_datadir):
+    records = [(shared_datadir / "DSpace_OAI_Record.xml").read_text()]
+    return records
+
+
+@pytest.fixture
 def jpal_oai_server(requests_mock, shared_datadir, request):
     url = "http+mock://example.com/oai"
     records = {
@@ -63,6 +69,33 @@ def jpal_oai_server(requests_mock, shared_datadir, request):
     for k, v in records.items():
         requests_mock.get(f"{url}?identifier={k}", text=v)
     return [records["doi:10.7910/DVN/19PPE7"], records["doi:10.7910/DVN/2ELQNE"]]
+
+
+@pytest.fixture
+def whoas_oai_server(requests_mock, shared_datadir, request):
+    url = "http+mock://example.com/oai"
+    records = {
+        "oai:darchive.mblwhoilibrary.org:1912/2367": (
+            shared_datadir / "whoas/GetRecord_01.xml"
+        ).read_text(),
+        "oai:darchive.mblwhoilibrary.org:1912/2368": (
+            shared_datadir / "whoas/GetRecord_02.xml"
+        ).read_text(),
+        "oai:darchive.mblwhoilibrary.org:1912/2369": (
+            shared_datadir / "whoas/GetRecord_03.xml"
+        ).read_text(),
+    }
+    requests_mock.get(
+        f"{url}?verb=ListIdentifiers",
+        text=(shared_datadir / "whoas/ListRecords.xml").read_text(),
+    )
+    for k, v in records.items():
+        requests_mock.get(f"{url}?identifier={k}", text=v)
+    return [
+        records["oai:darchive.mblwhoilibrary.org:1912/2367"],
+        records["oai:darchive.mblwhoilibrary.org:1912/2368"],
+        records["oai:darchive.mblwhoilibrary.org:1912/2369"],
+    ]
 
 
 @pytest.fixture
