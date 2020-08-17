@@ -10,7 +10,7 @@ class ApiV1:
         self.auth = auth
 
     def create_dataset(self, parent: str, dataset: dict) -> requests.Request:
-        url = f"{self.url}/{parent}/datasets"
+        url = f"{self.url}/dataverses/{parent}/datasets"
         return requests.Request("POST", url, json=dataset, auth=self.auth)
 
     def get_dataset_by_id(self, id: int) -> requests.Request:

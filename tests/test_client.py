@@ -30,7 +30,7 @@ def test_client_gets_dataset_by_pid(dataverse_minimal_json_record):
 def test_client_creates_dataset(dataset):
     with requests_mock.Mocker() as m:
         m.post(
-            "http+mock://example.com/api/v1/root/datasets",
+            "http+mock://example.com/api/v1/dataverses/root/datasets",
             json={"data": {"id": 1, "persistentId": "set1"}},
         )
         client = DataverseClient(Api("http+mock://example.com/"), Transport())
@@ -43,7 +43,7 @@ def test_client_creates_dataset(dataset):
 def test_client_adds_authentication(dataset):
     with requests_mock.Mocker() as m:
         m.post(
-            "http+mock://example.com/api/v1/root/datasets",
+            "http+mock://example.com/api/v1/dataverses/root/datasets",
             json={"data": {"id": 1, "persistentId": "set1"}},
         )
         api = Api("http+mock://example.com", DataverseKey("123"))

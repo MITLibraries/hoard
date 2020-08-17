@@ -5,7 +5,7 @@ from hoard.cli import main
 
 def test_cli_ingests(requests_mock, jpal_oai_server, jpal_dataverse_server):
     requests_mock.post(
-        "http+mock://example.com/api/v1/root/datasets",
+        "http+mock://example.com/api/v1/dataverses/root/datasets",
         json={"data": {"id": 1, "persistentId": "set1"}},
     )
     result = CliRunner().invoke(
