@@ -8,6 +8,7 @@ from hoard.client import DataverseClient, DataverseKey, OAIClient, Transport
 from hoard.models import Dataset
 from hoard.sources.jpal import JPAL
 from hoard.sources.lincolnLab import LincolnLab
+from hoard.sources.whoas import WHOAS
 
 
 @click.group()
@@ -16,7 +17,9 @@ def main():
 
 
 @main.command()
-@click.argument("source", type=click.Choice(["jpal", "llab"], case_sensitive=False))
+@click.argument(
+    "source", type=click.Choice(["jpal", "llab", "whoas"], case_sensitive=False)
+)
 @click.argument("source_url")
 @click.option("--key", "-k", help="RDR authentication key.")
 @click.option(
@@ -52,6 +55,9 @@ def ingest(
     elif source == "llab":
         stream = open(source_url)
         records = LincolnLab(stream)
+    elif source == "whoas":
+        client = OAIClient(source_url, "dim", "com_1912_4134")
+        records = WHOAS(client)
     for record in records:
         dv_id, p_id = rdr.create(record, parent=parent)
         if verbose:
