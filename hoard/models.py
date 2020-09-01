@@ -238,7 +238,7 @@ class Dataset:
                     ["timePeriodCoveredStart", "timePeriodCoveredEnd"],
                 )
             )
-        result = {
+        result: Dict[str, Any] = {
             "datasetVersion": {
                 "metadataBlocks": {
                     "citation": {"displayName": "Citation Metadata", "fields": fields}
