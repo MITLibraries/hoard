@@ -9,7 +9,7 @@ class Author:
     authorName: str
     authorAffiliation: str
     authorIdentifierScheme: Optional[str] = None
-    authorIdentifierValue: Optional[str] = None
+    authorIdentifier: Optional[str] = None
 
 
 @attr.s(auto_attribs=True)
@@ -23,12 +23,6 @@ class Contact:
 class Contributor:
     contributorName: Optional[str] = None
     contributorType: Optional[str] = None
-
-
-@attr.s(auto_attribs=True)
-class DatasetVersion:
-    license: Optional[str] = None
-    termsOfUse: Optional[str] = None
 
 
 @attr.s(auto_attribs=True)
@@ -47,6 +41,11 @@ class Distributor:
 class GrantNumber:
     grantNumberValue: Optional[str] = None
     grantNumberAgency: Optional[str] = None
+
+
+@attr.s(auto_attribs=True)
+class Keyword:
+    keywordValue: Optional[str] = None
 
 
 @attr.s(auto_attribs=True)
@@ -88,38 +87,42 @@ class Dataset:
     description: List[Description]
     subjects: List[str]
     title: str
-    alternateUrl: Optional[str] = None
+    alternativeURL: Optional[str] = None
     contributors: Optional[List[Contributor]] = None
     distributionDate: Optional[str] = None
     distributors: Optional[List[Distributor]] = None
     grantNumbers: Optional[List[GrantNumber]] = None
-    keywordValue: Optional[str] = None
-    kindOfData: Optional[str] = None
+    keywords: Optional[List[Keyword]] = None
+    kindOfData: Optional[List[str]] = None
     language: Optional[str] = None
     notesText: Optional[str] = None
     otherIds: Optional[List[OtherId]] = None
     producers: Optional[List[Producer]] = None
     productionPlace: Optional[str] = None
     publications: Optional[List[Publication]] = None
-    series: Optional[List[Series]] = None
+    series: Optional[Series] = None
     timePeriodsCovered: Optional[List[TimePeriodCovered]] = None
+    license: Optional[str] = None
+    termsOfUse: Optional[str] = None
 
     def asdict(self) -> dict:
         fields = [primitive(self.title, "title")]
-        if self.alternateUrl is not None:
-            fields = [primitive(self.alternateUrl, "alternateUrl")]
-        fields.append(
-            compound(
-                self.authors,
-                "author",
-                [
-                    "authorName",
-                    "authorAffiliation",
-                    "authorIdentifierScheme",
-                    "authorIdentifierValue",
-                ],
-            )
+        if self.alternativeURL is not None:
+            fields.append(primitive(self.alternativeURL, "alternativeURL"))
+        authors = compound(
+            self.authors,
+            "author",
+            [
+                "authorName",
+                "authorAffiliation",
+                "authorIdentifierScheme",
+                "authorIdentifier",
+            ],
         )
+        for author in authors["value"]:
+            if "authorIdentifierScheme" in author:
+                author["authorIdentifierScheme"]["typeClass"] = "controlledVocabulary"
+        fields.append(authors)
         fields.append(
             compound(
                 self.contacts,
@@ -132,24 +135,29 @@ class Dataset:
             )
         )
         if self.contributors is not None:
-            fields.append(
-                compound(
-                    self.contributors,
-                    "contributor",
-                    ["contributorName", "contributorType"],
-                )
+            contributors = compound(
+                self.contributors,
+                "contributor",
+                ["contributorName", "contributorType"],
             )
+            for contributor in contributors["value"]:
+                contributor["contributorType"]["typeClass"] = "controlledVocabulary"
+            fields.append(contributors)
         fields.append(
-            compound(self.description, "dsDescription", ["dsDescriptionValue"])
+            compound(
+                self.description,
+                "dsDescription",
+                ["dsDescriptionValue", "dsDescriptionDate"],
+            )
         )
         if self.distributionDate is not None:
-            fields = [primitive(self.distributionDate, "distributionDate")]
+            fields.append(primitive(self.distributionDate, "distributionDate"))
         if self.distributors is not None:
             fields.append(
                 compound(
                     self.distributors,
                     "distributor",
-                    ["distributorName", "distributorType"],
+                    ["distributorName", "distributorURL"],
                 )
             )
         if self.grantNumbers is not None:
@@ -160,14 +168,21 @@ class Dataset:
                     ["grantNumberValue", "grantNumberAgency"],
                 )
             )
-        if self.keywordValue is not None:
-            fields = [primitive(self.keywordValue, "keywordValue")]
+        if self.keywords is not None:
+            fields.append(compound(self.keywords, "keyword", ["keywordValue"]))
         if self.kindOfData is not None:
-            fields = [primitive(self.kindOfData, "kindOfData")]
+            fields.append(
+                {
+                    "typeName": "kindOfData",
+                    "multiple": True,
+                    "typeClass": "primitive",
+                    "value": self.kindOfData,
+                }
+            )
         if self.language is not None:
-            fields = [primitive(self.language, "language")]
+            fields.append(primitive(self.language, "language"))
         if self.notesText is not None:
-            fields = [primitive(self.notesText, "notesText")]
+            fields.append(primitive(self.notesText, "notesText"))
         if self.otherIds is not None:
             fields.append(
                 compound(self.otherIds, "otherId", ["otherIdValue", "otherIdAgency"],)
@@ -177,23 +192,42 @@ class Dataset:
                 compound(self.producers, "producer", ["producerName", "producerURL"],)
             )
         if self.productionPlace is not None:
-            fields = [primitive(self.productionPlace, "productionPlace")]
+            fields.append(primitive(self.productionPlace, "productionPlace"))
         if self.publications is not None:
-            fields.append(
-                compound(
-                    self.publications,
-                    "publication",
-                    [
-                        "publicationCitation",
-                        "publicationIDNumber",
-                        "publicationIDType",
-                        "publicationURL",
-                    ],
-                )
+            publications = compound(
+                self.publications,
+                "publication",
+                [
+                    "publicationCitation",
+                    "publicationIDNumber",
+                    "publicationIDType",
+                    "publicationURL",
+                ],
             )
+            for publication in publications["value"]:
+                publication["publicationIDType"]["typeClass"] = "controlledVocabulary"
+            fields.append(publications)
         if self.series is not None:
             fields.append(
-                compound(self.series, "series", ["seriesName", "seriesInformation"],)
+                {
+                    "typeName": "series",
+                    "multiple": False,
+                    "typeClass": "compound",
+                    "value": {
+                        "seriesName": {
+                            "multiple": False,
+                            "typeClass": "primitive",
+                            "typeName": "seriesName",
+                            "value": self.series.seriesName,
+                        },
+                        "seriesInformation": {
+                            "multiple": False,
+                            "typeClass": "primitive",
+                            "typeName": "seriesInformation",
+                            "value": self.series.seriesInformation,
+                        },
+                    },
+                }
             )
         fields.append(controlled(self.subjects, "subject"))
         if self.timePeriodsCovered is not None:
@@ -204,7 +238,6 @@ class Dataset:
                     ["timePeriodCoveredStart", "timePeriodCoveredEnd"],
                 )
             )
-
         result = {
             "datasetVersion": {
                 "metadataBlocks": {
@@ -212,7 +245,10 @@ class Dataset:
                 }
             }
         }
-
+        if self.license is not None:
+            result["datasetVersion"]["license"] = self.license
+        if self.termsOfUse is not None:
+            result["datasetVersion"]["termsOfUse"] = self.termsOfUse
         return result
 
 
@@ -317,7 +353,6 @@ def compound(values: List, type_name: str, subtype_names: List[str]) -> dict:
         "multiple": True,
         "typeName": type_name,
     }
-
     for v in values:
         result["value"].append(
             {

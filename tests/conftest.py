@@ -27,8 +27,15 @@ def dataset():
 
 
 @pytest.fixture
-def dataverse_json_record(shared_datadir):
-    f = (shared_datadir / "dataset-finch1.json").read_text()
+def dataverse_minimal_json_record(shared_datadir):
+    f = (shared_datadir / "required_fields.json").read_text()
+    r = json.loads(f)
+    return r
+
+
+@pytest.fixture
+def dataverse_full_json_record(shared_datadir):
+    f = (shared_datadir / "all_fields.json").read_text()
     r = json.loads(f)
     return r
 
