@@ -5,7 +5,7 @@ from hoard.source import JPAL, WHOAS
 
 
 def test_jpal_returns_datasets(
-    dataset, dataverse_json_record, dataverse_oai_xml_records
+    dataset, dataverse_minimal_json_record, dataverse_oai_xml_records
 ):
     oai_client = MagicMock()
     oai_client.__next__.return_value = next(iter(dataverse_oai_xml_records))
@@ -13,7 +13,7 @@ def test_jpal_returns_datasets(
         m.get(
             "http+mock://example.com/api/datasets/export?"
             "exporter=dataverse_json&persistentId=12345",
-            json=dataverse_json_record,
+            json=dataverse_minimal_json_record,
         )
         jpal = JPAL(oai_client)
         assert next(jpal) == dataset
