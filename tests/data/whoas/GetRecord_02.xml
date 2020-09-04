@@ -6,7 +6,7 @@
   <GetRecord>
     <record>
       <header>
-        <identifier>oai:darchive.mblwhoilibrary.org:1912/2367</identifier>
+        <identifier>oai:darchive.mblwhoilibrary.org:1912/2368</identifier>
         <datestamp>2016-09-26T17:42:49Z</datestamp>
         <setSpec>com_1912_1726</setSpec>
         <setSpec>com_1912_1725</setSpec>
@@ -14,29 +14,12 @@
         <setSpec>col_1912_2364</setSpec>
       </header>
       <metadata>
-        <oai_dc:dc
-          xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"
-          xmlns:doc="http://www.lyncode.com/xoai"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xmlns:dc="http://purl.org/dc/elements/1.1/"
-          xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
-          <dc:title>Mesoplodon densirostris El Hierro, Canary Islands, Spain 10/11/2003 Animal a Depth Profile</dc:title>
-          <dc:date>2008-08-28T14:38:00Z</dc:date>
-          <dc:date>2008-08-28T14:38:00Z</dc:date>
-          <dc:date>2003-10-11</dc:date>
-          <dc:date>2008-08-28T14:38:00Z</dc:date>
-          <dc:type>Dataset</dc:type>
-          <dc:identifier>Excerpted from: md03_284a</dc:identifier>
-          <dc:identifier>http://hdl.handle.net/1912/2368</dc:identifier>
-          <dc:rights>Attribution-ShareAlike 3.0 Unported</dc:rights>
-          <dc:rights>http://creativecommons.org/licenses/by-sa/3.0</dc:rights>
-          <dc:format>text/plain</dc:format>
-          <dc:format>image/jpeg</dc:format>
-          <dc:coverage>27º 41.83', -17º 56.54'</dc:coverage>
-          <dc:coverage>El Hierro, Canary Islands, Spain</dc:coverage>
-          <dc:coverage>11:34:37 Local</dc:coverage>
-          <dc:publisher>The DTAG Project, Woods Hole Oceanographic Institution and University of La Laguna. Contact: dtag@whoi.edu, cetaceos@ull.es</dc:publisher>
-        </oai_dc:dc>
+        <dim:dim xmlns:doc="http://www.lyncode.com/xoai" xmlns:dim="http://www.dspace.org/xmlns/dspace/dim" xsi:schemaLocation="http://www.dspace.org/xmlns/dspace/dim http://www.dspace.org/schema/dim.xsd">
+        <dim:field mdschema="dc" element="date" qualifier="available">2019-06-07T17:41:39Z</dim:field>
+        <dim:field mdschema="dc" element="date" qualifier="issued">2019-06-04</dim:field>
+        <dim:field mdschema="dc" element="identifier" qualifier="uri">https://hdl.handle.net/1912/2368</dim:field>
+        <dim:field mdschema="dc" element="title" lang="en_US">Animals on the Move and Deep‐Sea Vents: Dataset for Spherical Display Systems</dim:field>
+        </dim:dim>
       </metadata>
     </record>
   </GetRecord>

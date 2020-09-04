@@ -1,7 +1,8 @@
 import requests_mock
 from unittest.mock import MagicMock
 
-from hoard.source import JPAL, WHOAS
+from hoard.sources.jpal import JPAL
+from hoard.sources.whoas import WHOAS
 
 
 def test_jpal_returns_datasets(
