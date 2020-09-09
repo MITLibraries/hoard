@@ -43,11 +43,10 @@ def create_from_whoas_dim_xml(data: str) -> Dataset:
     contacts = [
         Contact(
             datasetContactName="NAME, FAKE",
-            datasetContactEmail="FAKE_EMAIL@FAKE_DOMAIN.EDU",
+            datasetContactEmail="FAKE_EMAIL@EXAMPLE.COM",
         )
     ]
     descriptions = []
-    subjects = []
     distributors = []
     grantNumbers = []
     keywords = []
@@ -67,8 +66,6 @@ def create_from_whoas_dim_xml(data: str) -> Dataset:
                 authors.append(
                     Author(authorName=field.text, authorAffiliation="Woods Hole")
                 )
-            else:
-                authors.append(Author(authorName="", authorAffiliation=""))
         if (
             field.attrib["element"] == "description"
             and "qualifier" in field.attrib
@@ -76,10 +73,7 @@ def create_from_whoas_dim_xml(data: str) -> Dataset:
         ):
             if field.text is not None:
                 descriptions.append(Description(dsDescriptionValue=field.text))
-            else:
-                descriptions.append(Description(dsDescriptionValue=""))
         if field.attrib["element"] == "subject":
-            subjects.append(field.text)
             keywords.append(Keyword(keywordValue=field.text))
         if (
             field.attrib["element"] == "identifier"
@@ -116,7 +110,7 @@ def create_from_whoas_dim_xml(data: str) -> Dataset:
         if (
             field.attrib["element"] == "coverage"
             and "qualifier" in field.attrib
-            and field.attrib["qualifier"] == "spacial"
+            and field.attrib["qualifier"] == "spatial"
         ):
             kwargs["productionPlace"] = field.text
         if field.attrib["element"] == "relation" and "qualifier" not in field.attrib:
@@ -126,32 +120,34 @@ def create_from_whoas_dim_xml(data: str) -> Dataset:
             and "qualifier" in field.attrib
             and field.attrib["qualifier"] == "ispartof"
         ):
-            kwargs["series"] = Series(seriesInformation=field.text)
+            kwargs["series"] = Series(seriesName=field.text)
         if (
             field.attrib["element"] == "coverage"
             and "qualifier" in field.attrib
             and field.attrib["qualifier"] == "temporal"
         ):
             if field.text is not None and " - " in field.text:
-                start = field.text[: field.text.index(" - ")]
-                end = field.text[field.text.index(" - ") + 3 : field.text.index("(UTC")]
+                dates = field.text.split(" - ")
+                start = dates[0]
+                end = dates[1].rstrip(" (UTC)")
                 timePeriodsCovered.append(
                     TimePeriodCovered(
                         timePeriodCoveredStart=start, timePeriodCoveredEnd=end,
                     )
                 )
-            if field.attrib["element"] == "rights" and "qualifier" not in field.attrib:
-                kwargs["license"] = field.text
-                kwargs["termsOfUse"] = field.text
+        if field.attrib["element"] == "rights" and "qualifier" not in field.attrib:
+            kwargs["license"] = field.text
+            kwargs["termsOfUse"] = field.text
 
     kwargs["authors"] = authors
     kwargs["contacts"] = contacts
     kwargs["description"] = descriptions
-    kwargs["subjects"] = subjects
+    kwargs["subjects"] = ["Earth and Environmental Sciences"]
     kwargs["distributors"] = distributors
     kwargs["grantNumbers"] = grantNumbers
     kwargs["keywords"] = keywords
     kwargs["kindOfData"] = kindOfData
     kwargs["otherIds"] = otherIds
     kwargs["publications"] = publications
+    kwargs["timePeriodsCovered"] = timePeriodsCovered
     return Dataset(**kwargs)
