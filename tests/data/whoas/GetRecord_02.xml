@@ -14,29 +14,36 @@
         <setSpec>col_1912_2364</setSpec>
       </header>
       <metadata>
-        <oai_dc:dc
-          xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/"
-          xmlns:doc="http://www.lyncode.com/xoai"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xmlns:dc="http://purl.org/dc/elements/1.1/"
-          xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
-          <dc:title>Mesoplodon densirostris El Hierro, Canary Islands, Spain 10/11/2003 Animal a Depth Profile</dc:title>
-          <dc:date>2008-08-28T14:38:00Z</dc:date>
-          <dc:date>2008-08-28T14:38:00Z</dc:date>
-          <dc:date>2003-10-11</dc:date>
-          <dc:date>2008-08-28T14:38:00Z</dc:date>
-          <dc:type>Dataset</dc:type>
-          <dc:identifier>Excerpted from: md03_284a</dc:identifier>
-          <dc:identifier>http://hdl.handle.net/1912/2368</dc:identifier>
-          <dc:rights>Attribution-ShareAlike 3.0 Unported</dc:rights>
-          <dc:rights>http://creativecommons.org/licenses/by-sa/3.0</dc:rights>
-          <dc:format>text/plain</dc:format>
-          <dc:format>image/jpeg</dc:format>
-          <dc:coverage>27º 41.83', -17º 56.54'</dc:coverage>
-          <dc:coverage>El Hierro, Canary Islands, Spain</dc:coverage>
-          <dc:coverage>11:34:37 Local</dc:coverage>
-          <dc:publisher>The DTAG Project, Woods Hole Oceanographic Institution and University of La Laguna. Contact: dtag@whoi.edu, cetaceos@ull.es</dc:publisher>
-        </oai_dc:dc>
+        <dim:dim xmlns:doc="http://www.lyncode.com/xoai" xmlns:dim="http://www.dspace.org/xmlns/dspace/dim" xsi:schemaLocation="http://www.dspace.org/xmlns/dspace/dim http://www.dspace.org/schema/dim.xsd">
+        <dim:field mdschema="dc" element="contributor" qualifier="author" authority="3fe71a0a-2805-4c59-829e-cb9664896bfa" confidence="600">Beaulieu, Stace E.</dim:field>
+        <dim:field mdschema="dc" element="contributor" qualifier="author" authority="3fe71a0a-2805-4c59-829e-cb9664896bfa" confidence="600">Brickley, Annette</dim:field>
+        <dim:field mdschema="dc" element="coverage" qualifier="temporal">2019-06-04 - 2019-06-04(UTC)</dim:field>
+        <dim:field mdschema="dc" element="date" qualifier="accessioned">2019-06-07T17:41:39Z</dim:field>
+        <dim:field mdschema="dc" element="date" qualifier="available">2019-06-07T17:41:39Z</dim:field>
+        <dim:field mdschema="dc" element="date" qualifier="issued">2019-06-04</dim:field>
+        <dim:field mdschema="dc" element="identifier" qualifier="uri">https://hdl.handle.net/1912/2368</dim:field>
+        <dim:field mdschema="dc" element="identifier" qualifier="doi">10.26025/8ke9-av98</dim:field>
+        <dim:field mdschema="dc" element="description" lang="en_US">This zipped file, “animals-on-the-move_ver1_vents_ver2.zip”, contains educational materials and datasets produced for spherical display systems. The zipped file contains 2 main folders: Animals_on_the_Move_ver1 as Version 1 of new content prepared for NOAA’s Science on a Sphere®, and vent_discoveries_pngs_updated_to_2016 as Version 2 of global datasets contained within Global Viewport to Deep‐Sea Vents: Dataset for Spherical Display Systems, DOI:10.1575/1912/6867. The unzipped contents are 785 MB, with a total of 100 files in 32 folders.</dim:field>
+        <dim:field mdschema="dc" element="description">This educational package, “animals-on-the-move_ver1_vents_ver2.zip”, is Copyright ©2019 Woods Hole Oceanographic Institution. Deep-sea vent discoveries and locations were derived from the InterRidge Vents Database Version 3.4 (https://vents-data.interridge.org/); thus, a subset of the materials in this package – specifically, the global datasets that have the filenames "vent_YYYY.png" in which YYYY is the year – is licensed under a Creative Commons Attribution‐Noncommercial‐ ShareAlike 3.0 Unported License (CC BY‐NC‐SA 3.0; https://creativecommons.org/licenses/by‐ncsa/ 3.0/). For images and mp4 files that we provided to accompany the Live Program, please see full credits and licensing in the Dataset Description document.</dim:field>
+        <dim:field mdschema="dc" element="description" qualifier="abstract" lang="en_US">This educational package was developed.</dim:field>]
+        <dim:field mdschema="dc" element="description" qualifier="abstract" lang="en">Sample abstract</dim:field>
+        <dim:field mdschema="dc" element="description" qualifier="provenance" lang="en">Approved for entry into archive by Deborah Roth (droth@whoi.edu) on 2019-06-07T17:41:39Z (GMT) No. of bitstreams: 1
+        animals-on-the-move_ver1_vents_ver2.zip: 820943968 bytes, checksum: 0ba7e089cb52f2ad7c30f16f58020082 (MD5)</dim:field>
+        <dim:field mdschema="dc" element="description" qualifier="provenance" lang="en">Made available in DSpace on 2019-06-07T17:41:39Z (GMT). No. of bitstreams: 1
+        animals-on-the-move_ver1_vents_ver2.zip: 820943968 bytes, checksum: 0ba7e089cb52f2ad7c30f16f58020082 (MD5)
+          Previous issue date: 2019-06-04</dim:field>
+        <dim:field mdschema="dc" element="description" qualifier="sponsorship" lang="en_US">Funding for this educational package.</dim:field>
+        <dim:field mdschema="dc" element="publisher">Esteemed Publishing Conglomerate</dim:field>
+        <dim:field mdschema="dc" element="relation">Associated publication</dim:field>
+        <dim:field mdschema="dc" element="relation" qualifier="ispartof">https://hdl.handle.net/1912/6867</dim:field>
+        <dim:field mdschema="dc" element="relation" qualifier="uri">https://doi.org/10.26025/8ke9-av98</dim:field>
+        <dim:field mdschema="dc" element="rights">Attribution 4.0 International</dim:field>
+        <dim:field mdschema="dc" element="rights" qualifier="uri">http://creativecommons.org/licenses/by/4.0/</dim:field>
+        <dim:field mdschema="dc" element="subject" lang="en_US">Migration</dim:field>
+        <dim:field mdschema="dc" element="subject" lang="en_US">Larval dispersal</dim:field>
+        <dim:field mdschema="dc" element="title" lang="en_US">Animals on the Move and Deep‐Sea Vents: Dataset for Spherical Display Systems</dim:field>
+        <dim:field mdschema="dc" element="type" lang="en_US">Dataset</dim:field>
+        </dim:dim>
       </metadata>
     </record>
   </GetRecord>
