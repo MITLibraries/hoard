@@ -194,9 +194,9 @@
           },
           {
             "typeName": "language",
-            "multiple": false,
-            "typeClass": "primitive",
-            "value": "Language"
+            "multiple": true,
+            "typeClass": "controlledVocabulary",
+            "value": ["English"]
           },
           {
             "typeName": "notesText",

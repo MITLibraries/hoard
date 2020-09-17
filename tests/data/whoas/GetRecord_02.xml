@@ -34,6 +34,7 @@
           Previous issue date: 2019-06-04</dim:field>
         <dim:field mdschema="dc" element="description" qualifier="sponsorship" lang="en_US">Funding for this educational package.</dim:field>
         <dim:field mdschema="dc" element="publisher">Esteemed Publishing Conglomerate</dim:field>
+        <dim:field mdschema="dc" element="language" qualifier="iso">en_US</dim:field>
         <dim:field mdschema="dc" element="relation">Associated publication</dim:field>
         <dim:field mdschema="dc" element="relation" qualifier="ispartof">https://hdl.handle.net/1912/6867</dim:field>
         <dim:field mdschema="dc" element="relation" qualifier="uri">https://doi.org/10.26025/8ke9-av98</dim:field>

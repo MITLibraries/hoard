@@ -1,5 +1,6 @@
 from typing import Any, Dict, Iterator
 
+import pycountry  # type: ignore
 import xml.etree.ElementTree as ET
 
 from hoard.client import OAIClient
@@ -51,6 +52,7 @@ def create_from_whoas_dim_xml(data: str) -> Dataset:
     grantNumbers = []
     keywords = []
     kindOfData = []
+    languages = []
     otherIds = []
     publications = []
     timePeriodsCovered = []
@@ -104,7 +106,10 @@ def create_from_whoas_dim_xml(data: str) -> Dataset:
             and "qualifier" in field.attrib
             and field.attrib["qualifier"] == "iso"
         ):
-            kwargs["language"] = field.text
+            if field.text is not None:
+                lang_value = pycountry.languages.get(alpha_2=field.text[:2])
+                if lang_value != "":
+                    languages.append(lang_value.name)
         if field.attrib["element"] == "identifier":
             otherIds.append(OtherId(otherIdValue=field.text))
         if (
@@ -147,6 +152,7 @@ def create_from_whoas_dim_xml(data: str) -> Dataset:
     kwargs["grantNumbers"] = grantNumbers
     kwargs["keywords"] = keywords
     kwargs["kindOfData"] = kindOfData
+    kwargs["language"] = languages
     kwargs["otherIds"] = otherIds
     kwargs["publications"] = publications
     kwargs["timePeriodsCovered"] = timePeriodsCovered

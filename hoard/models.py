@@ -93,7 +93,7 @@ class Dataset:
     grantNumbers: Optional[List[GrantNumber]] = None
     keywords: Optional[List[Keyword]] = None
     kindOfData: Optional[List[str]] = None
-    language: Optional[str] = None
+    language: Optional[List[str]] = None
     notesText: Optional[str] = None
     otherIds: Optional[List[OtherId]] = None
     producers: Optional[List[Producer]] = None
@@ -179,7 +179,7 @@ class Dataset:
                 }
             )
         if self.language is not None:
-            fields.append(primitive(self.language, "language"))
+            fields.append(controlled(self.language, "language"))
         if self.notesText is not None:
             fields.append(primitive(self.notesText, "notesText"))
         if self.otherIds is not None:
