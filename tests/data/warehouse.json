@@ -1,0 +1,50 @@
+{
+    "authors": [
+        {
+            "mit_id": "900000000",
+            "first_name": "Honor",
+            "middle_name": "E",
+            "last_name": "Durance",
+            "full_name": "Durance, Honor E",
+            "krb_name": "honor",
+            "email": "honor@example.com"
+        },
+        {
+            "mit_id": "900000001",
+            "first_name": "Increase",
+            "middle_name": "D",
+            "last_name": "Briggs",
+            "full_name": "Briggs, Increase D",
+            "krb_name": "increase",
+            "email": "increase@example.com"
+        },
+        {
+            "mit_id": "900000002",
+            "first_name": "Temperance",
+            "middle_name": "F",
+            "last_name": "Joiner",
+            "full_name": "Joiner, Temperance F",
+            "krb_name": "temperance",
+            "email": "temperance@example.com"
+        },
+        {
+            "mit_id": "900000003",
+            "first_name": "Silence",
+            "middle_name": "G",
+            "last_name": "Joiner",
+            "full_name": "Joiner, Silence G",
+            "krb_name": "silence",
+            "email": "silence@example.com"
+        }
+    ],
+    "orcids": [
+        {
+            "mit_id": "900000000",
+            "orcid": "0000-0000-0000"
+        },
+        {
+            "mit_id": "900000001",
+            "orcid": "0000-0000-0001"
+        }
+    ]
+}

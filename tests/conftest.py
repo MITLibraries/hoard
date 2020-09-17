@@ -1,8 +1,10 @@
 import json
+import pathlib
 
 import pytest
 
 from hoard.models import Author, Contact, Dataset, Description
+from hoard.names.db import authors, engine, metadata, orcids
 
 
 @pytest.fixture
@@ -116,3 +118,23 @@ def jpal_dataverse_server(requests_mock, shared_datadir):
         requests_mock.get(
             f"{url}?persistentId={k}", text=(shared_datadir / v).read_text()
         )
+
+
+@pytest.fixture
+def db():
+    engine.configure("sqlite://")
+    metadata.create_all(engine())
+    yield
+    metadata.drop_all(engine())
+
+
+@pytest.fixture
+def warehouse_data(db):
+    #  The shared_data pytest plugin seems kind of broken with sub-packages.
+    #  Hence, dropping back into stdlib for fixtures here.
+    c = pathlib.Path(__file__).parent.absolute()
+    with open(c / "data/warehouse.json") as fp:
+        data = json.load(fp)
+    with engine().connect() as conn:
+        conn.execute(authors.insert(), data["authors"])
+        conn.execute(orcids.insert(), data["orcids"])
