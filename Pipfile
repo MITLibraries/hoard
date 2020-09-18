@@ -22,6 +22,8 @@ bs4 = "*"
 sickle = "*"
 smart-open = {extras = ["aws"], version = "*"}
 pycountry = "*"
+sqlalchemy = "*"
+cx-oracle = "*"
 
 [requires]
 python_version = "3.8"
