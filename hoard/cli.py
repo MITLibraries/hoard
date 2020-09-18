@@ -6,9 +6,7 @@ from smart_open import open  # type: ignore
 from hoard.api import Api
 from hoard.client import DataverseClient, DataverseKey, OAIClient, Transport
 from hoard.models import Dataset
-from hoard.sources.jpal import JPAL
-from hoard.sources.lincolnLab import LincolnLab
-from hoard.sources.whoas import WHOAS
+from hoard.sources import JPAL, LincolnLab, WHOAS
 
 
 @click.group()
