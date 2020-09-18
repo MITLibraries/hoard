@@ -104,7 +104,7 @@ def test_full_dataset(dataverse_full_json_record):
         grantNumbers=[grantNumbers],
         distributors=[distributors],
         distributionDate="1004-01-01",
-        language="Language",
+        language=["English"],
         timePeriodsCovered=[timePeriodsCovered],
         kindOfData=["KindOfData1", "KindOfData2"],
         series=series,

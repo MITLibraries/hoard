@@ -87,6 +87,7 @@ def test_create_whoas_required_dim_xml(whoas_oai_server):
     assert dataset.distributors == distributors
     assert dataset.grantNumbers == grantNumbers
     assert dataset.keywords == keywords
+    assert dataset.language == ["English"]
     assert dataset.otherIds == otherIds
     assert dataset.publications == publications
     assert dataset.series == series
