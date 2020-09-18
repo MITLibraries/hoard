@@ -19,6 +19,12 @@ from hoard.models import (
 )
 
 
+namespace = {
+    "oai": "http://www.openarchives.org/OAI/2.0/",
+    "dim": "http://www.dspace.org/xmlns/dspace/dim",
+}
+
+
 class WHOAS:
     def __init__(self, client: OAIClient) -> None:
         self.client = client
@@ -27,18 +33,19 @@ class WHOAS:
         return self
 
     def __next__(self) -> Dataset:
-        record = next(self.client)
-        dataset = create_from_whoas_dim_xml(record)
-        return dataset
+        while True:
+            record = next(self.client)
+            parsed_record = ET.fromstring(record)
+            if parsed_record.find(".//oai:error", namespace) is not None:
+                continue
+            else:
+                dataset = create_from_whoas_dim_xml(record)
+            return dataset
 
 
 def create_from_whoas_dim_xml(data: str) -> Dataset:
     kwargs: Dict[str, Any] = {}
     record = ET.fromstring(data)
-    namespace = {
-        "oai": "http://www.openarchives.org/OAI/2.0/",
-        "dim": "http://www.dspace.org/xmlns/dspace/dim",
-    }
     fields = record.findall(".//dim:field", namespace)
     authors = []
     contacts = [
