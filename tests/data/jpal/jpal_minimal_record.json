@@ -1,0 +1,85 @@
+{
+  "id": "00002",
+  "identifier": "DVN/00002",
+  "persistentUrl": "https://doi.org/00.0000/DVN/00002",
+  "protocol": "doi",
+  "authority": "00.0000",
+  "publisher": "Fake JPAL Dataverse",
+  "publicationDate": "2020-01-01",
+  "storageIdentifier": "s3://00.0000/DVN/00002",
+  "datasetVersion": {
+    "metadataBlocks": {
+      "citation": {
+        "fields": [
+          {
+            "value": "Darwin's Finches",
+            "typeClass": "primitive",
+            "multiple": false,
+            "typeName": "title"
+          },
+          {
+            "value": [
+              {
+                "authorName": {
+                  "value": "Finch, Fiona",
+                  "typeClass": "primitive",
+                  "multiple": false,
+                  "typeName": "authorName"
+                },
+                "authorAffiliation": {
+                  "value": "Birds Inc.",
+                  "typeClass": "primitive",
+                  "multiple": false,
+                  "typeName": "authorAffiliation"
+                }
+              }
+            ],
+            "typeClass": "compound",
+            "multiple": true,
+            "typeName": "author"
+          },
+          {
+            "value": [
+                { "datasetContactEmail" : {
+                    "typeClass": "primitive",
+                    "multiple": false,
+                    "typeName": "datasetContactEmail",
+                    "value" : "finch@mailinator.com"
+                },
+                "datasetContactName" : {
+                    "typeClass": "primitive",
+                    "multiple": false,
+                    "typeName": "datasetContactName",
+                    "value": "Finch, Fiona"
+                }
+            }],
+            "typeClass": "compound",
+            "multiple": true,
+            "typeName": "datasetContact"
+          },
+          {
+            "value": [ {
+               "dsDescriptionValue":{
+                "value":   "Darwin's finches (also known as the Galápagos finches) are a group of about fifteen species of passerine birds.",
+                "multiple":false,
+               "typeClass": "primitive",
+               "typeName": "dsDescriptionValue"
+            }}],
+            "typeClass": "compound",
+            "multiple": true,
+            "typeName": "dsDescription"
+          },
+          {
+            "value": [
+              "Medicine, Health and Life Sciences"
+            ],
+            "typeClass": "controlledVocabulary",
+            "multiple": true,
+            "typeName": "subject"
+          }
+        ],
+        "displayName": "Citation Metadata"
+      }
+    }
+  }
+}
