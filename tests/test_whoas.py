@@ -58,6 +58,11 @@ def test_create_whoas_required_dim_xml(whoas_oai_server):
         Keyword(keywordValue="Migration"),
         Keyword(keywordValue="Larval dispersal"),
     ]
+    notesText = (
+        "This zipped file contains educational materials. "
+        "This educational package is Copyright ©2019 Woods"
+        " Hole Oceanographic Institution."
+    )
     otherIds = [
         OtherId(otherIdValue="https://hdl.handle.net/1912/2368", otherIdAgency=None),
         OtherId(otherIdValue="10.26025/8ke9-av98", otherIdAgency=None),
@@ -88,10 +93,13 @@ def test_create_whoas_required_dim_xml(whoas_oai_server):
     assert dataset.grantNumbers == grantNumbers
     assert dataset.keywords == keywords
     assert dataset.language == ["English"]
+    assert dataset.notesText == notesText
     assert dataset.otherIds == otherIds
     assert dataset.publications == publications
     assert dataset.series == series
     assert dataset.timePeriodsCovered == timePeriodsCovered
+    assert dataset.license == "Attribution 4.0 International"
+    assert dataset.termsOfUse == "Attribution 4.0 International"
 
 
 def test_whoas_returns_datasets(dspace_oai_xml_records):
