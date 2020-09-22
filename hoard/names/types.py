@@ -1,11 +1,11 @@
-from typing import Iterable, Protocol
-from typing_extensions import TypedDict
+from typing import Iterable, Optional, Protocol, TypedDict
 
 
 class Author(TypedDict):
     kerb: str
-    full_name: str
-    orcid: str
+    name: str
+    orcid: Optional[str]
+    dlc: str
 
 
 class Searchable(Protocol):
