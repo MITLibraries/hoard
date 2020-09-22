@@ -58,8 +58,8 @@ def create_from_whoas_dim_xml(data: str) -> Dataset:
     distributors = []
     grantNumbers = []
     keywords = []
-    kindOfData = []
     languages = []
+    notesText = None
     otherIds = []
     publications = []
     timePeriodsCovered = []
@@ -107,7 +107,10 @@ def create_from_whoas_dim_xml(data: str) -> Dataset:
                 GrantNumber(grantNumberValue=field.text, grantNumberAgency=field.text)
             )
         if field.attrib["element"] == "description" and "qualifier" not in field.attrib:
-            kindOfData.append(field.text)
+            if notesText is None:
+                notesText = field.text
+            else:
+                notesText += f" {field.text}"
         if (
             field.attrib["element"] == "language"
             and "qualifier" in field.attrib
@@ -158,8 +161,8 @@ def create_from_whoas_dim_xml(data: str) -> Dataset:
     kwargs["distributors"] = distributors
     kwargs["grantNumbers"] = grantNumbers
     kwargs["keywords"] = keywords
-    kwargs["kindOfData"] = kindOfData
     kwargs["language"] = languages
+    kwargs["notesText"] = notesText
     kwargs["otherIds"] = otherIds
     kwargs["publications"] = publications
     kwargs["timePeriodsCovered"] = timePeriodsCovered
