@@ -13,7 +13,7 @@ metadata = MetaData()
 
 
 authors = Table(
-    "library_person_lookup",
+    "hr_person_employee_limited",
     metadata,
     Column("mit_id", String),
     Column("first_name", Unicode),
@@ -22,13 +22,14 @@ authors = Table(
     Column("full_name", Unicode),
     Column("krb_name", String),
     Column("email", String),
+    Column("directory_org_unit_title", String),
 )
 
 
 orcids = Table(
     "orcid_to_mitid",
     metadata,
-    Column("mit_id", String, ForeignKey("library_person_lookup.mit_id")),
+    Column("mit_id", String, ForeignKey("hr_person_employee_limited.mit_id")),
     Column("orcid", String),
 )
 
