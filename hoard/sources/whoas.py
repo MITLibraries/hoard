@@ -129,9 +129,7 @@ def create_from_whoas_dim_xml(data: str) -> Dataset:
         ):
             kwargs["productionPlace"] = field.text
         if field.attrib["element"] == "relation" and "qualifier" not in field.attrib:
-            publications.append(
-                Publication(publicationCitation=field.text, publicationIDType="url")
-            )
+            publications.append(Publication(publicationCitation=field.text))
         if (
             field.attrib["element"] == "relation"
             and "qualifier" in field.attrib

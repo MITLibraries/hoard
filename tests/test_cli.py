@@ -3,7 +3,7 @@ from click.testing import CliRunner
 from hoard.cli import main
 
 
-def test_cli_ingests(requests_mock, jpal_oai_server, jpal_dataverse_server):
+def test_cli_jpal_ingests(requests_mock, jpal_oai_server, jpal_dataverse_server):
     requests_mock.post(
         "http+mock://example.com/api/v1/dataverses/root/datasets",
         json={"data": {"id": 1, "persistentId": "set1"}},

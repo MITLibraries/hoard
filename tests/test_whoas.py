@@ -67,11 +67,7 @@ def test_create_whoas_required_dim_xml(whoas_oai_server):
         OtherId(otherIdValue="https://hdl.handle.net/1912/2368", otherIdAgency=None),
         OtherId(otherIdValue="10.26025/8ke9-av98", otherIdAgency=None),
     ]
-    publications = [
-        Publication(
-            publicationCitation="Associated publication", publicationIDType="url"
-        )
-    ]
+    publications = [Publication(publicationCitation="Associated publication")]
     series = Series(seriesName="https://hdl.handle.net/1912/6867")
 
     timePeriodsCovered = [
