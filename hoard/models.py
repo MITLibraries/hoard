@@ -203,7 +203,9 @@ class Dataset:
                     "publicationURL",
                 ],
             )
-            for publication in publications["value"]:
+            for publication in [
+                p for p in publications["value"] if "publicationIDType" in p
+            ]:
                 publication["publicationIDType"]["typeClass"] = "controlledVocabulary"
             fields.append(publications)
         if self.series is not None:
