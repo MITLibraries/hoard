@@ -1,7 +1,10 @@
+import logging
+import sys
 from typing import Iterator, Optional
 
 import click
 from smart_open import open  # type: ignore
+import structlog  # type: ignore
 
 from hoard.api import Api
 from hoard.client import DataverseClient, DataverseKey, OAIClient, Transport
@@ -11,7 +14,23 @@ from hoard.sources import JPAL, LincolnLab, WHOAS
 
 @click.group()
 def main():
-    pass
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout, format="%(message)s")
+    structlog.configure(
+        processors=[
+            structlog.stdlib.add_logger_name,
+            structlog.stdlib.filter_by_level,
+            structlog.stdlib.add_log_level,
+            structlog.stdlib.PositionalArgumentsFormatter(),
+            structlog.processors.TimeStamper(fmt="%Y-%m-%d %H:%M.%S"),
+            structlog.processors.StackInfoRenderer(),
+            structlog.processors.format_exc_info,
+            structlog.dev.ConsoleRenderer(pad_event=0),
+        ],
+        context_class=dict,
+        logger_factory=structlog.stdlib.LoggerFactory(),
+        wrapper_class=structlog.stdlib.BoundLogger,
+        cache_logger_on_first_use=True,
+    )
 
 
 @main.command()

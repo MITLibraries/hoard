@@ -20,10 +20,12 @@ requests = "*"
 attrs = "*"
 bs4 = "*"
 sickle = "*"
-smart-open = {extras = ["aws"], version = "*"}
+smart-open = {extras = ["s3"], version = "*"}
 pycountry = "*"
 sqlalchemy = "*"
 cx-oracle = "*"
+structlog = "*"
+colorama = "*"
 
 [requires]
 python_version = "3.8"
