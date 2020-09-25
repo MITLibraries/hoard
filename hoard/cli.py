@@ -4,6 +4,7 @@ from typing import Iterator, Optional
 
 import click
 from smart_open import open  # type: ignore
+import requests
 import structlog  # type: ignore
 
 from hoard.api import Api
@@ -76,8 +77,14 @@ def ingest(
         client = OAIClient(source_url, "dim", "com_1912_4134")
         records = WHOAS(client)
     for record in records:
-        dv_id, p_id = rdr.create(record, parent=parent)
-        if verbose:
-            click.echo(f"Created {p_id}")
-        count += 1
+        try:
+            dv_id, p_id = rdr.create(record, parent=parent)
+            if verbose:
+                click.echo(f"Created {p_id}")
+            count += 1
+        except requests.HTTPError as e:
+            click.echo(
+                f"Unable to ingest record. HTTP error: {e}."
+                f"Dataverse response: {e.response.text}"
+            )
     click.echo(f"{count} records ingested from {source}")
