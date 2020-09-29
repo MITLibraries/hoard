@@ -64,6 +64,10 @@ class OAIClient:
         self.client = client
         session = requests.Session()
         self.session = session
+        self.namespace = {
+            "oai": "http://www.openarchives.org/OAI/2.0/",
+            "dim": "http://www.dspace.org/xmlns/dspace/dim",
+        }
 
     def __iter__(self) -> Iterator[str]:
         return self
@@ -71,25 +75,18 @@ class OAIClient:
     def __next__(self) -> str:
         if self.ids is None:
             self.ids = self.fetch_ids()
-        session = self.session
         while True:
             header_xml = next(self.ids)
             parsed_header = ET.fromstring(header_xml.raw)
-            namespace = {"oai": "http://www.openarchives.org/OAI/2.0/"}
-            id_elem = parsed_header.find("oai:identifier", namespace)
+            id_elem = parsed_header.find("oai:identifier", self.namespace)
             if id_elem is None:
                 raise Exception("No OAI identifier found")
             else:
                 id = id_elem.text
-            params = {
-                "verb": "GetRecord",
-                "metadataPrefix": self.format,
-                "identifier": id,
-            }
-            record = session.get(self.source_url, params=params).text
+            record = self.get_record(id)
             parsed_record = ET.fromstring(record)
             deleted = parsed_record.find(
-                ".//oai:header[@status='deleted']", namespaces=namespace
+                ".//oai:header[@status='deleted']", namespaces=self.namespace
             )
             if deleted:
                 continue
@@ -103,3 +100,23 @@ class OAIClient:
             params["set"] = self.set
         ids = client.ListIdentifiers(**params)
         return ids
+
+    def get_record(self, id):
+        session = self.session
+        params = {
+            "verb": "GetRecord",
+            "metadataPrefix": self.format,
+            "identifier": id,
+        }
+        record = session.get(self.source_url, params=params).text
+        return record
+
+    def get_record_title(self, id):
+        record = self.get_record(id)
+        parsed_record = ET.fromstring(record)
+        fields = parsed_record.findall(".//dim:field", self.namespace)
+        series_name = None
+        for field in fields:
+            if field.attrib["element"] == "title" and "qualifier" not in field.attrib:
+                series_name = field.text
+        return series_name

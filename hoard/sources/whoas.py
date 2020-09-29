@@ -39,11 +39,11 @@ class WHOAS:
             if parsed_record.find(".//oai:error", namespace) is not None:
                 continue
             else:
-                dataset = create_from_whoas_dim_xml(record)
+                dataset = create_from_whoas_dim_xml(record, self.client)
             return dataset
 
 
-def create_from_whoas_dim_xml(data: str) -> Dataset:
+def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
     kwargs: Dict[str, Any] = {}
     record = ET.fromstring(data)
     fields = record.findall(".//dim:field", namespace)
@@ -135,7 +135,14 @@ def create_from_whoas_dim_xml(data: str) -> Dataset:
             and "qualifier" in field.attrib
             and field.attrib["qualifier"] == "ispartof"
         ):
-            kwargs["series"] = Series(seriesName=field.text)
+            if field.text is not None and field.text.startswith(
+                "https://hdl.handle.net/"
+            ):
+                series_args = {"seriesInformation": field.text}
+                id = f"oai:darchive.mblwhoilibrary.org:{field.text[23:]}"
+                series_name = client.get_record_title(id)
+                series_args["seriesName"] = series_name
+                kwargs["series"] = Series(**series_args)
         if (
             field.attrib["element"] == "coverage"
             and "qualifier" in field.attrib
