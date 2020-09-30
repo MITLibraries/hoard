@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 import attr
 
@@ -105,23 +105,24 @@ class Dataset:
     termsOfUse: Optional[str] = None
 
     def asdict(self) -> dict:
-        fields = [primitive(self.title, "title")]
-        if self.alternativeURL is not None:
-            fields.append(primitive(self.alternativeURL, "alternativeURL"))
-        authors = compound(
-            self.authors,
-            "author",
-            [
-                "authorName",
-                "authorAffiliation",
-                "authorIdentifierScheme",
-                "authorIdentifier",
-            ],
+        fields: List[Optional[Dict[str, Any]]] = [primitive(self.title, "title")]
+
+        fields.append(primitive(self.alternativeURL, "alternativeURL"))
+
+        fields.append(
+            compound(
+                self.authors,
+                "author",
+                [
+                    "authorName",
+                    "authorAffiliation",
+                    "authorIdentifierScheme",
+                    "authorIdentifier",
+                ],
+                controlled_subfield="authorIdentifierScheme",
+            )
         )
-        for author in authors["value"]:
-            if "authorIdentifierScheme" in author:
-                author["authorIdentifierScheme"]["typeClass"] = "controlledVocabulary"
-        fields.append(authors)
+
         fields.append(
             compound(
                 self.contacts,
@@ -133,15 +134,16 @@ class Dataset:
                 ],
             )
         )
-        if self.contributors is not None:
-            contributors = compound(
+
+        fields.append(
+            compound(
                 self.contributors,
                 "contributor",
                 ["contributorName", "contributorType"],
+                controlled_subfield="contributorType",
             )
-            for contributor in contributors["value"]:
-                contributor["contributorType"]["typeClass"] = "controlledVocabulary"
-            fields.append(contributors)
+        )
+
         fields.append(
             compound(
                 self.description,
@@ -149,51 +151,42 @@ class Dataset:
                 ["dsDescriptionValue", "dsDescriptionDate"],
             )
         )
-        if self.distributionDate is not None:
-            fields.append(primitive(self.distributionDate, "distributionDate"))
-        if self.distributors is not None:
-            fields.append(
-                compound(
-                    self.distributors,
-                    "distributor",
-                    ["distributorName", "distributorURL"],
-                )
+
+        fields.append(primitive(self.distributionDate, "distributionDate"))
+
+        fields.append(
+            compound(
+                self.distributors, "distributor", ["distributorName", "distributorURL"],
             )
-        if self.grantNumbers is not None:
-            fields.append(
-                compound(
-                    self.grantNumbers,
-                    "grantNumber",
-                    ["grantNumberValue", "grantNumberAgency"],
-                )
+        )
+
+        fields.append(
+            compound(
+                self.grantNumbers,
+                "grantNumber",
+                ["grantNumberValue", "grantNumberAgency"],
             )
-        if self.keywords is not None:
-            fields.append(compound(self.keywords, "keyword", ["keywordValue"]))
-        if self.kindOfData is not None:
-            fields.append(
-                {
-                    "typeName": "kindOfData",
-                    "multiple": True,
-                    "typeClass": "primitive",
-                    "value": self.kindOfData,
-                }
-            )
-        if self.language is not None:
-            fields.append(controlled(self.language, "language"))
-        if self.notesText is not None:
-            fields.append(primitive(self.notesText, "notesText"))
-        if self.otherIds is not None:
-            fields.append(
-                compound(self.otherIds, "otherId", ["otherIdValue", "otherIdAgency"],)
-            )
-        if self.producers is not None:
-            fields.append(
-                compound(self.producers, "producer", ["producerName", "producerURL"],)
-            )
-        if self.productionPlace is not None:
-            fields.append(primitive(self.productionPlace, "productionPlace"))
-        if self.publications is not None:
-            publications = compound(
+        )
+        fields.append(compound(self.keywords, "keyword", ["keywordValue"]))
+
+        fields.append(primitive(self.kindOfData, "kindOfData", multiple=True))
+
+        fields.append(controlled(self.language, "language"))
+
+        fields.append(primitive(self.notesText, "notesText"))
+
+        fields.append(
+            compound(self.otherIds, "otherId", ["otherIdValue", "otherIdAgency"],)
+        )
+
+        fields.append(
+            compound(self.producers, "producer", ["producerName", "producerURL"],)
+        )
+
+        fields.append(primitive(self.productionPlace, "productionPlace"))
+
+        fields.append(
+            compound(
                 self.publications,
                 "publication",
                 [
@@ -202,68 +195,74 @@ class Dataset:
                     "publicationIDType",
                     "publicationURL",
                 ],
+                controlled_subfield="publicationIDType",
             )
-            for publication in [
-                p for p in publications["value"] if "publicationIDType" in p
-            ]:
-                publication["publicationIDType"]["typeClass"] = "controlledVocabulary"
-            fields.append(publications)
+        )
+
         if self.series is not None:
-            fields.append(
-                {
-                    "typeName": "series",
-                    "multiple": False,
-                    "typeClass": "compound",
-                    "value": {
-                        "seriesName": {
-                            "multiple": False,
-                            "typeClass": "primitive",
-                            "typeName": "seriesName",
-                            "value": self.series.seriesName,
-                        },
-                        "seriesInformation": {
-                            "multiple": False,
-                            "typeClass": "primitive",
-                            "typeName": "seriesInformation",
-                            "value": self.series.seriesInformation,
-                        },
-                    },
-                }
-            )
-        fields.append(controlled(self.subjects, "subject"))
-        if self.timePeriodsCovered is not None:
-            fields.append(
-                compound(
-                    self.timePeriodsCovered,
-                    "timePeriodCovered",
-                    ["timePeriodCoveredStart", "timePeriodCoveredEnd"],
+            series: Dict[str, Any] = {
+                "typeName": "series",
+                "multiple": False,
+                "typeClass": "compound",
+                "value": {},
+            }
+            if self.series.seriesName:
+                series["value"]["seriesName"] = primitive(
+                    self.series.seriesName, "seriesName"
                 )
+            if self.series.seriesInformation:
+                series["value"]["seriesInformation"] = primitive(
+                    self.series.seriesInformation, "seriesInformation"
+                )
+            fields.append(series)
+
+        fields.append(controlled(self.subjects, "subject"))
+
+        fields.append(
+            compound(
+                self.timePeriodsCovered,
+                "timePeriodCovered",
+                ["timePeriodCoveredStart", "timePeriodCoveredEnd"],
             )
+        )
+
         result: Dict[str, Any] = {
             "datasetVersion": {
                 "metadataBlocks": {
-                    "citation": {"displayName": "Citation Metadata", "fields": fields}
+                    "citation": {
+                        "displayName": "Citation Metadata",
+                        "fields": list(filter(None, fields)),
+                    }
                 }
             }
         }
+
         if self.license is not None:
             result["datasetVersion"]["license"] = self.license
         if self.termsOfUse is not None:
             result["datasetVersion"]["termsOfUse"] = self.termsOfUse
+
         return result
 
 
 # Dataverse metadata block types
 
 
-def compound(values: List, type_name: str, subtype_names: List[str]) -> dict:
+def compound(
+    values: Optional[List],
+    type_name: str,
+    subtype_names: List[str],
+    controlled_subfield: Optional[str] = None,
+) -> Optional[dict]:
+    if not values:
+        return None
     result: Dict[str, Any] = {
         "value": [],
         "typeClass": "compound",
         "multiple": True,
         "typeName": type_name,
     }
-    for v in values:
+    for i, v in enumerate(values):
         result["value"].append(
             {
                 subtype: primitive(getattr(v, subtype), subtype)
@@ -271,11 +270,20 @@ def compound(values: List, type_name: str, subtype_names: List[str]) -> dict:
                 if getattr(v, subtype) is not None
             }
         )
+        if (
+            controlled_subfield is not None
+            and controlled_subfield in result["value"][i]
+        ):
+            result["value"][i][controlled_subfield][
+                "typeClass"
+            ] = "controlledVocabulary"
 
     return result
 
 
-def controlled(values: List[str], type_name: str) -> dict:
+def controlled(values: Optional[List[str]], type_name: str) -> Optional[dict]:
+    if not values:
+        return None
     result = {
         "value": values,
         "typeClass": "controlledVocabulary",
@@ -286,11 +294,15 @@ def controlled(values: List[str], type_name: str) -> dict:
     return result
 
 
-def primitive(value: str, type_name: str) -> dict:
+def primitive(
+    value: Optional[Union[List, str]], type_name: str, multiple: bool = False
+) -> Optional[dict]:
+    if not value:
+        return None
     result = {
         "value": value,
         "typeClass": "primitive",
-        "multiple": False,
+        "multiple": multiple,
         "typeName": type_name,
     }
 

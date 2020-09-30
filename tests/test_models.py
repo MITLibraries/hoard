@@ -114,3 +114,44 @@ def test_full_dataset(dataverse_full_json_record):
     assert json.dumps(new_record.asdict(), sort_keys=True) == json.dumps(
         dataverse_full_json_record, sort_keys=True
     )
+
+
+def test_asdict_removes_null_values(dataverse_partial_json_record):
+    author = Author(
+        authorName="LastAuthor1, FirstAuthor1", authorAffiliation="AuthorAffiliation1",
+    )
+    contact = Contact(
+        datasetContactName="LastContact1, FirstContact1",
+        datasetContactEmail="ContactEmail1@mailinator.com",
+    )
+    description = Description(dsDescriptionValue="DescriptionText 1",)
+    contributors = Contributor(contributorName="LastContributor1, FirstContributor1",)
+    distributors = Distributor(distributorName="LastDistributor1, FirstDistributor1",)
+    keywords = Keyword(keywordValue="KeywordTerm1")
+    grantNumbers = GrantNumber(grantNumberValue="GrantInformationGrantNumber1",)
+    otherIds = OtherId(otherIdValue="OtherIDIdentifier1",)
+    producers = Producer(producerName="LastProducer1, FirstProducer1",)
+    publications = Publication(
+        publicationCitation="RelatedPublicationCitation1",
+        publicationURL="http://RelatedPublicationURL1.org",
+    )
+    series = Series(seriesInformation="SeriesInformation",)
+    new_record = Dataset(
+        authors=[author],
+        contacts=[contact],
+        description=[description],
+        subjects=["Agricultural Sciences"],
+        title="Replication Data for: Title",
+        keywords=[keywords],
+        otherIds=[otherIds],
+        publications=[publications],
+        producers=[producers],
+        contributors=[contributors],
+        grantNumbers=[grantNumbers],
+        distributors=[distributors],
+        kindOfData=[],
+        series=series,
+    )
+    assert json.dumps(new_record.asdict(), sort_keys=True) == json.dumps(
+        dataverse_partial_json_record, sort_keys=True
+    )

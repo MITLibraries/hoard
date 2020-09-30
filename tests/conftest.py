@@ -36,6 +36,13 @@ def dataverse_minimal_json_record(shared_datadir):
 
 
 @pytest.fixture
+def dataverse_partial_json_record(shared_datadir):
+    f = (shared_datadir / "partial_fields.json").read_text()
+    r = json.loads(f)
+    return r
+
+
+@pytest.fixture
 def dataverse_full_json_record(shared_datadir):
     f = (shared_datadir / "all_fields.json").read_text()
     r = json.loads(f)
