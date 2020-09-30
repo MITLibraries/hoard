@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 from typing import Any, Dict, Iterator
 from urllib.parse import urlparse
-=======
-from collections import defaultdict
-from typing import Any, DefaultDict, Iterator
->>>>>>> 16730e1... defaultdict
 
 import pycountry  # type: ignore
 import xml.etree.ElementTree as ET
@@ -59,6 +54,19 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
             datasetContactEmail="FAKE_EMAIL@EXAMPLE.COM",
         )
     ]
+    list_keys = [
+        "authors",
+        "description",
+        "keywords",
+        "distributors",
+        "grantNumbers",
+        "language",
+        "otherIds",
+        "publications",
+        "timePeriodsCovered",
+    ]
+    for key in list_keys:
+        kwargs.setdefault(key, [])
     notesText = ""
     for field in fields:
         if field.attrib["element"] == "title" and "qualifier" not in field.attrib:
@@ -160,6 +168,7 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
             kwargs["termsOfUse"] = field.text
 
     kwargs["subjects"] = ["Earth and Environmental Sciences"]
+    kwargs = {k: v for k, v in kwargs.items() if v}
     if notesText != "":
         kwargs["notesText"] = notesText
     return Dataset(**kwargs)

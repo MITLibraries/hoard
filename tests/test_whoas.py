@@ -97,7 +97,9 @@ def test_create_whoas_dim_xml(whoas_oai_server, dspace_oai_xml_series_name_recor
         assert dataset.description == description
         assert dataset.subjects == subjects
 
-        dataset = create_from_whoas_dim_xml(whoas_oai_server[1], client)
+        dataset = create_from_whoas_dim_xml(whoas_oai_server[1])
+        for k, v in dataset.__dict__.items():
+            assert v != []
         assert dataset.title == title
         assert dataset.authors == authors
         assert dataset.contacts == contacts
