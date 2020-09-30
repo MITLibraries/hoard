@@ -1,4 +1,5 @@
 from typing import Any, Dict, Iterator
+from urllib.parse import urlparse
 
 import pycountry  # type: ignore
 import xml.etree.ElementTree as ET
@@ -139,7 +140,8 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
                 "https://hdl.handle.net/"
             ):
                 series_args = {"seriesInformation": field.text}
-                id = f"oai:darchive.mblwhoilibrary.org:{field.text[23:]}"
+                parsed_url = urlparse(field.text)
+                id = f"oai:darchive.mblwhoilibrary.org:{parsed_url.path[1:]}"
                 series_name = client.get_record_title(id)
                 series_args["seriesName"] = series_name
                 kwargs["series"] = Series(**series_args)
