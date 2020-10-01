@@ -26,7 +26,14 @@ def test_cli_jpal_ingests(requests_mock, jpal_oai_server, jpal_dataverse_server)
     assert "HTTP error: 400" in result.output
 
 
-def test_cli_whoas_ingests(requests_mock, whoas_oai_server):
+def test_cli_whoas_ingests(
+    requests_mock, whoas_oai_server, dspace_oai_xml_series_name_record
+):
+    requests_mock.get(
+        "http+mock://example.com/oai?verb=GetRecord&metadataPrefix=dim"
+        "&identifier=oai%3Adarchive.mblwhoilibrary.org:1912/6867",
+        text=dspace_oai_xml_series_name_record,
+    )
     requests_mock.post(
         "http+mock://example.com/api/v1/dataverses/root/datasets",
         json={"data": {"id": 1, "persistentId": "set1"}},

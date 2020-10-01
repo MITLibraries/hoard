@@ -62,6 +62,12 @@ def dspace_oai_xml_records(shared_datadir):
 
 
 @pytest.fixture
+def dspace_oai_xml_series_name_record(shared_datadir):
+    record = (shared_datadir / "whoas/GetRecordSeriesName.xml").read_text()
+    return record
+
+
+@pytest.fixture
 def jpal_oai_server(requests_mock, shared_datadir, request):
     url = "http+mock://example.com/oai"
     records = {
