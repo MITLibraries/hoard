@@ -5,6 +5,7 @@ from hoard.client import OAIClient
 from hoard.models import (
     Author,
     Contact,
+    Dataset,
     Description,
     Distributor,
     GrantNumber,
@@ -118,14 +119,11 @@ def test_create_whoas_dim_xml(whoas_oai_server, dspace_oai_xml_series_name_recor
         assert dataset.termsOfUse == "Attribution 4.0 International"
 
 
-def test_whoas_returns_datasets(dspace_oai_xml_records):
+def test_whoas_returns_datasets(whoas_oai_server):
     oai_client = MagicMock()
-    oai_client.__next__.return_value = next(iter(dspace_oai_xml_records))
-    with requests_mock.Mocker() as m:
-        m.get(
-            "http+mock://example.com/oai", text=dspace_oai_xml_records[0],
-        )
-        whoas = WHOAS(oai_client)
-        assert (
-            next(whoas).title == "The Title"
-        )  # Not sure how deep we want to go with the testing
+    oai_client.__next__.return_value = next(iter(whoas_oai_server))
+    records = WHOAS(oai_client)
+    assert type(next(records)) == Dataset
+    assert next(records).title is not None
+    assert next(records).authors is not None
+    assert next(records).description is not None

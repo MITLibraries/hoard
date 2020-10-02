@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="static/style.xsl"?>
 <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
   <responseDate>2020-08-12T18:18:43Z</responseDate>
-  <request verb="GetRecord" identifier="oai:darchive.mblwhoilibrary.org:1912/2367" metadataPrefix="oai_dc">https://darchive.mblwhoilibrary.org/oai/request</request>
+  <request verb="GetRecord" identifier="oai:darchive.mblwhoilibrary.org:1912/2369" metadataPrefix="oai_dc">https://darchive.mblwhoilibrary.org/oai/request</request>
   <GetRecord>
     <record>
       <header status="deleted">
