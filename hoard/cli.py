@@ -11,6 +11,7 @@ from hoard.api import Api
 from hoard.client import DataverseClient, DataverseKey, OAIClient, Transport
 from hoard.models import Dataset
 from hoard.names import AuthorService, engine, Warehouse
+from hoard.names.logging import s3_log
 from hoard.sources import JPAL, LincolnLab, WHOAS
 
 
@@ -50,13 +51,19 @@ def main():
     default="http://localhost",
     help="URL for RDR. Records will be ingested into this system.",
 )
+@click.option(
+    "--name-log",
+    help="Path to file for name lookup log. Use s3://bucket/key for S3 logging.",
+)
 @click.option("--verbose", "-v", is_flag=True)
+@s3_log
 def ingest(
     source: str,
     source_url: str,
     key: Optional[str],
     url: str,
     parent: str,
+    name_log: str,
     verbose: bool,
 ) -> None:
     """Ingest a source into RDR.
