@@ -6,7 +6,7 @@
             "middle_name": "E",
             "last_name": "Durance",
             "full_name": "Durance, Honor E",
-            "krb_name": "honor",
+            "krb_name_uppercase": "honor",
             "email": "honor@example.com",
             "directory_org_unit_title": "Philosophy"
         },
@@ -16,7 +16,7 @@
             "middle_name": "D",
             "last_name": "Briggs",
             "full_name": "Briggs, Increase D",
-            "krb_name": "increase",
+            "krb_name_uppercase": "increase",
             "email": "increase@example.com",
             "directory_org_unit_title": "Architecture"
         },
@@ -26,7 +26,7 @@
             "middle_name": "F",
             "last_name": "Joiner",
             "full_name": "Joiner, Temperance F",
-            "krb_name": "temperance",
+            "krb_name_uppercase": "temperance",
             "email": "temperance@example.com",
             "directory_org_unit_title": "Physics"
         },
@@ -36,7 +36,7 @@
             "middle_name": "G",
             "last_name": "Joiner",
             "full_name": "Joiner, Silence G",
-            "krb_name": "silence",
+            "krb_name_uppercase": "silence",
             "email": "silence@example.com",
             "directory_org_unit_title": "Math"
         }

@@ -4,9 +4,10 @@ from hoard.names.service import AuthorService, parse
 
 
 def test_parse_splits_words():
-    assert parse("Foo Bar Baz Gaz") == ("Gaz", "Foo", "Bar")
-    assert parse("Foo Bar Baz") == ("Baz", "Foo", "Bar")
-    assert parse("Foo Bar") == ("Bar", "Foo", "")
+    assert parse("Foo Bar, Baz Gaz") == ("Foo Bar", "Baz", "Gaz")
+    assert parse("Foo, Bar Baz") == ("Foo", "Bar", "Baz")
+    assert parse("Foo Bar") == ("Foo Bar", "", "")
+    assert parse("Foo") == ("Foo", "", "")
 
 
 def test_author_service_produces_list_of_names():

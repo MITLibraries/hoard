@@ -10,6 +10,7 @@ import structlog  # type: ignore
 from hoard.api import Api
 from hoard.client import DataverseClient, DataverseKey, OAIClient, Transport
 from hoard.models import Dataset
+from hoard.names import AuthorService, engine, Warehouse
 from hoard.sources import JPAL, LincolnLab, WHOAS
 
 
@@ -88,3 +89,30 @@ def ingest(
                 f"Dataverse response: {e.response.text}"
             )
     click.echo(f"{count} records ingested from {source}")
+
+
+def pipe(ctx, param, value):
+    if not value:
+        return (line.rstrip() for line in click.get_text_stream("stdin"))
+    else:
+        return value
+
+
+@main.command()
+@click.argument("authors", nargs=-1, callback=pipe)
+@click.option("--database", help="SQLAlchemy DB connection string")
+def author(authors, database) -> None:
+    """Search for one or more authors.
+
+    Can be used to query the data warehouse for an author.
+    """
+    engine.configure(database)
+    svc = AuthorService(Warehouse(engine()))
+    for author in authors:
+        click.echo(author)
+        results = svc.find(author)
+        for result in results:
+            name = result[1]["name"]
+            kerb = result[1]["kerb"]
+            dlc = result[1]["dlc"]
+            click.echo(f"\t{name} ({kerb})\t{dlc}")

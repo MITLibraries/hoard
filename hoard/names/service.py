@@ -15,10 +15,17 @@ class AuthorService:
 def parse(name: str) -> Tuple[str, str, str]:
     """Parse a name into constituent parts.
 
+    This assumes the name is of the form:
+
+        last, first middle
+
+    If there is no comma, it will treat the entire string as the last name.
     The returned tuple is ordered like: (last, first, middle).
     """
-    parts = name.split()
-    last = parts.pop()
+    last, *rest = name.split(",")
+    if not rest:
+        return last, "", ""
+    parts = rest[0].split()
     parts.reverse()
     try:
         first = parts.pop()
