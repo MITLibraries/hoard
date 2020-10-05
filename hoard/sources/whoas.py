@@ -42,19 +42,20 @@ class WHOAS:
             if parsed_record.find(".//oai:error", namespace) is not None:
                 continue
             else:
-                dataset = create_from_whoas_dim_xml(record, self.client)
-                if not all([dataset.title, dataset.authors, dataset.description]):
-                    continue
-            return dataset
+                try:
+                    dataset = create_from_whoas_dim_xml(record, self.client)
+                    return dataset
+                except TypeError as ex:
+                    id_elem = parsed_record.find(".//oai:identifier", namespace)
+                    if id_elem is not None:
+                        rec_id = id_elem.text
+                    logger.info(f"Error with {rec_id}: {str(ex)}")
 
 
 def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
     kwargs: Dict[str, Any] = {}
     record = ET.fromstring(data)
     fields = record.findall(".//dim:field", namespace)
-    id_elem = record.find(".//oai:identifier", namespace)
-    if id_elem is not None:
-        rec_id = id_elem.text
     kwargs["contacts"] = [
         Contact(
             datasetContactName="NAME, FAKE",
@@ -170,13 +171,4 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
     kwargs["subjects"] = ["Earth and Environmental Sciences"]
     if notesText != "":
         kwargs["notesText"] = notesText
-    if "title" not in kwargs:
-        logger.info(f"dc.title not found in record: {rec_id}")
-        kwargs["title"] = None
-    elif "authors" not in kwargs:
-        logger.info(f"dc.contributor.author not found in record: {rec_id}")
-        kwargs["authors"] = None
-    elif "description" not in kwargs:
-        logger.info(f"dc.description.abstract not found in record: {rec_id}")
-        kwargs["description"] = None
     return Dataset(**kwargs)
