@@ -2,6 +2,7 @@ from typing import Any, Dict, Iterator
 from urllib.parse import urlparse
 
 import pycountry  # type: ignore
+import structlog  # type: ignore
 import xml.etree.ElementTree as ET
 
 from hoard.client import OAIClient
@@ -19,6 +20,7 @@ from hoard.models import (
     TimePeriodCovered,
 )
 
+logger = structlog.get_logger()
 
 namespace = {
     "oai": "http://www.openarchives.org/OAI/2.0/",
@@ -40,8 +42,14 @@ class WHOAS:
             if parsed_record.find(".//oai:error", namespace) is not None:
                 continue
             else:
-                dataset = create_from_whoas_dim_xml(record, self.client)
-            return dataset
+                try:
+                    dataset = create_from_whoas_dim_xml(record, self.client)
+                    return dataset
+                except TypeError as ex:
+                    id_elem = parsed_record.find(".//oai:identifier", namespace)
+                    if id_elem is not None:
+                        rec_id = id_elem.text
+                    logger.info(f"Error with {rec_id}: {str(ex)}")
 
 
 def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:

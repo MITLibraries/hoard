@@ -2,11 +2,11 @@
 <?xml-stylesheet type="text/xsl" href="static/style.xsl"?>
 <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
   <responseDate>2020-08-12T18:18:43Z</responseDate>
-  <request verb="GetRecord" identifier="oai:darchive.mblwhoilibrary.org:1912/2368" metadataPrefix="oai_dc">https://darchive.mblwhoilibrary.org/oai/request</request>
+  <request verb="GetRecord" identifier="oai:darchive.mblwhoilibrary.org:1912/2371" metadataPrefix="oai_dc">https://darchive.mblwhoilibrary.org/oai/request</request>
   <GetRecord>
     <record>
       <header>
-        <identifier>oai:darchive.mblwhoilibrary.org:1912/2368</identifier>
+        <identifier>oai:darchive.mblwhoilibrary.org:1912/2371</identifier>
         <datestamp>2016-09-26T17:42:49Z</datestamp>
         <setSpec>com_1912_1726</setSpec>
         <setSpec>com_1912_1725</setSpec>
@@ -21,12 +21,8 @@
         <dim:field mdschema="dc" element="date" qualifier="accessioned">2019-06-07T17:41:39Z</dim:field>
         <dim:field mdschema="dc" element="date" qualifier="available">2019-06-07T17:41:39Z</dim:field>
         <dim:field mdschema="dc" element="date" qualifier="issued">2019-06-04</dim:field>
-        <dim:field mdschema="dc" element="identifier" qualifier="uri">https://hdl.handle.net/1912/2368</dim:field>
+        <dim:field mdschema="dc" element="identifier" qualifier="uri">https://hdl.handle.net/1912/2371</dim:field>
         <dim:field mdschema="dc" element="identifier" qualifier="doi">10.26025/8ke9-av98</dim:field>
-        <dim:field mdschema="dc" element="description" lang="en_US">This zipped file contains educational materials.</dim:field>
-        <dim:field mdschema="dc" element="description">This educational package is Copyright ©2019 Woods Hole Oceanographic Institution.</dim:field>
-        <dim:field mdschema="dc" element="description" qualifier="abstract" lang="en_US">This educational package was developed.</dim:field>]
-        <dim:field mdschema="dc" element="description" qualifier="abstract" lang="en">Sample abstract</dim:field>
         <dim:field mdschema="dc" element="description" qualifier="provenance" lang="en">Approved for entry into archive by Deborah Roth (droth@whoi.edu) on 2019-06-07T17:41:39Z (GMT) No. of bitstreams: 1
         animals-on-the-move_ver1_vents_ver2.zip: 820943968 bytes, checksum: 0ba7e089cb52f2ad7c30f16f58020082 (MD5)</dim:field>
         <dim:field mdschema="dc" element="description" qualifier="provenance" lang="en">Made available in DSpace on 2019-06-07T17:41:39Z (GMT). No. of bitstreams: 1

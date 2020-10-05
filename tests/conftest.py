@@ -56,12 +56,6 @@ def dataverse_oai_xml_records(shared_datadir):
 
 
 @pytest.fixture
-def dspace_oai_xml_records(shared_datadir):
-    records = [(shared_datadir / "DSpace_OAI_Record.xml").read_text()]
-    return records
-
-
-@pytest.fixture
 def dspace_oai_xml_series_name_record(shared_datadir):
     record = (shared_datadir / "whoas/GetRecordSeriesName.xml").read_text()
     return record
@@ -106,6 +100,12 @@ def whoas_oai_server(requests_mock, shared_datadir, request):
         "oai:darchive.mblwhoilibrary.org:1912/2369": (
             shared_datadir / "whoas/GetRecord_03.xml"
         ).read_text(),
+        "oai:darchive.mblwhoilibrary.org:1912/2370": (
+            shared_datadir / "whoas/GetRecord_04.xml"
+        ).read_text(),
+        "oai:darchive.mblwhoilibrary.org:1912/2371": (
+            shared_datadir / "whoas/GetRecord_05.xml"
+        ).read_text(),
     }
     requests_mock.get(
         f"{url}?verb=ListIdentifiers",
@@ -117,6 +117,8 @@ def whoas_oai_server(requests_mock, shared_datadir, request):
         records["oai:darchive.mblwhoilibrary.org:1912/2367"],
         records["oai:darchive.mblwhoilibrary.org:1912/2368"],
         records["oai:darchive.mblwhoilibrary.org:1912/2369"],
+        records["oai:darchive.mblwhoilibrary.org:1912/2370"],
+        records["oai:darchive.mblwhoilibrary.org:1912/2371"],
     ]
 
 
