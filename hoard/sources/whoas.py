@@ -48,22 +48,13 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
     kwargs: Dict[str, Any] = {}
     record = ET.fromstring(data)
     fields = record.findall(".//dim:field", namespace)
-    authors = []
-    contacts = [
+    kwargs["contacts"] = [
         Contact(
             datasetContactName="NAME, FAKE",
             datasetContactEmail="FAKE_EMAIL@EXAMPLE.COM",
         )
     ]
-    descriptions = []
-    distributors = []
-    grantNumbers = []
-    keywords = []
-    languages = []
-    notesText = None
-    otherIds = []
-    publications = []
-    timePeriodsCovered = []
+    notesText = ""
     for field in fields:
         if field.attrib["element"] == "title" and "qualifier" not in field.attrib:
             kwargs["title"] = field.text
@@ -73,7 +64,7 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
             and field.attrib["qualifier"] == "author"
         ):
             if field.text is not None:
-                authors.append(
+                kwargs.setdefault("authors", []).append(
                     Author(authorName=field.text, authorAffiliation="Woods Hole")
                 )
         if (
@@ -82,9 +73,11 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
             and field.attrib["qualifier"] == "abstract"
         ):
             if field.text is not None:
-                descriptions.append(Description(dsDescriptionValue=field.text))
+                kwargs.setdefault("description", []).append(
+                    Description(dsDescriptionValue=field.text)
+                )
         if field.attrib["element"] == "subject":
-            keywords.append(Keyword(keywordValue=field.text))
+            kwargs.setdefault("keywords", []).append(Keyword(keywordValue=field.text))
         if (
             field.attrib["element"] == "identifier"
             and "qualifier" in field.attrib
@@ -98,17 +91,19 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
         ):
             kwargs["distributionDate"] = field.text
         if field.attrib["element"] == "publisher":
-            distributors.append(Distributor(distributorName=field.text))
+            kwargs.setdefault("distributors", []).append(
+                Distributor(distributorName=field.text)
+            )
         if (
             field.attrib["element"] == "description"
             and "qualifier" in field.attrib
             and field.attrib["qualifier"] == "sponsorship"
         ):
-            grantNumbers.append(
+            kwargs.setdefault("grantNumbers", []).append(
                 GrantNumber(grantNumberValue=field.text, grantNumberAgency=field.text)
             )
         if field.attrib["element"] == "description" and "qualifier" not in field.attrib:
-            if notesText is None:
+            if field.text is not None and notesText == "":
                 notesText = field.text
             else:
                 notesText += f" {field.text}"
@@ -120,9 +115,9 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
             if field.text is not None:
                 lang_value = pycountry.languages.get(alpha_2=field.text[:2])
                 if lang_value != "":
-                    languages.append(lang_value.name)
+                    kwargs.setdefault("language", []).append(lang_value.name)
         if field.attrib["element"] == "identifier":
-            otherIds.append(OtherId(otherIdValue=field.text))
+            kwargs.setdefault("otherIds", []).append(OtherId(otherIdValue=field.text))
         if (
             field.attrib["element"] == "coverage"
             and "qualifier" in field.attrib
@@ -130,7 +125,9 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
         ):
             kwargs["productionPlace"] = field.text
         if field.attrib["element"] == "relation" and "qualifier" not in field.attrib:
-            publications.append(Publication(publicationCitation=field.text))
+            kwargs.setdefault("publications", []).append(
+                Publication(publicationCitation=field.text)
+            )
         if (
             field.attrib["element"] == "relation"
             and "qualifier" in field.attrib
@@ -154,7 +151,7 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
                 dates = field.text.split(" - ")
                 start = dates[0]
                 end = dates[1].rstrip(" (UTC)")
-                timePeriodsCovered.append(
+                kwargs.setdefault("timePeriodsCovered", []).append(
                     TimePeriodCovered(
                         timePeriodCoveredStart=start, timePeriodCoveredEnd=end,
                     )
@@ -163,16 +160,7 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
             kwargs["license"] = field.text
             kwargs["termsOfUse"] = field.text
 
-    kwargs["authors"] = authors
-    kwargs["contacts"] = contacts
-    kwargs["description"] = descriptions
     kwargs["subjects"] = ["Earth and Environmental Sciences"]
-    kwargs["distributors"] = distributors
-    kwargs["grantNumbers"] = grantNumbers
-    kwargs["keywords"] = keywords
-    kwargs["language"] = languages
-    kwargs["notesText"] = notesText
-    kwargs["otherIds"] = otherIds
-    kwargs["publications"] = publications
-    kwargs["timePeriodsCovered"] = timePeriodsCovered
+    if notesText != "":
+        kwargs["notesText"] = notesText
     return Dataset(**kwargs)
