@@ -1,5 +1,6 @@
 from typing import Iterable, Tuple
 
+from hoard.names.logging import log
 from hoard.names.types import Author, Searchable
 
 
@@ -7,6 +8,7 @@ class AuthorService:
     def __init__(self, repository: Searchable) -> None:
         self.repository = repository
 
+    @log
     def find(self, name: str) -> Iterable[Tuple[str, Author]]:
         for result in self.repository.find(*parse(name)):
             yield (name, result)
