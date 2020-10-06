@@ -79,6 +79,9 @@ def test_create_whoas_dim_xml(whoas_oai_server, dspace_oai_xml_series_name_recor
             ),
             OtherId(otherIdValue="10.26025/8ke9-av98", otherIdAgency=None),
         ]
+        otherIds_2 = [
+            OtherId(otherIdValue="https://hdl.handle.net/1912/2372", otherIdAgency=None)
+        ]
         publications = [Publication(publicationCitation="Associated publication")]
         series = Series(
             seriesName="Series Title",
@@ -90,6 +93,12 @@ def test_create_whoas_dim_xml(whoas_oai_server, dspace_oai_xml_series_name_recor
                 timePeriodCoveredStart="2019-06-04", timePeriodCoveredEnd="2019-06-04",
             )
         ]
+
+        partial_timePeriodsCovered = [
+            TimePeriodCovered(timePeriodCoveredStart="2019-06-04")
+        ]
+
+        # minimal record
         subjects = ["Earth and Environmental Sciences"]
         dataset = create_from_whoas_dim_xml(whoas_oai_server[0], client)
         assert dataset.title == title
@@ -98,6 +107,7 @@ def test_create_whoas_dim_xml(whoas_oai_server, dspace_oai_xml_series_name_recor
         assert dataset.description == description
         assert dataset.subjects == subjects
 
+        # full record
         dataset = create_from_whoas_dim_xml(whoas_oai_server[1], client)
         for _k, v in dataset.__dict__.items():
             assert v != []
@@ -115,6 +125,27 @@ def test_create_whoas_dim_xml(whoas_oai_server, dspace_oai_xml_series_name_recor
         assert dataset.publications == publications
         assert dataset.series == series
         assert dataset.timePeriodsCovered == timePeriodsCovered
+        assert dataset.license == "Attribution 4.0 International"
+        assert dataset.termsOfUse == "Attribution 4.0 International"
+
+        # record with invalid date
+        dataset = create_from_whoas_dim_xml(whoas_oai_server[5], client)
+        for _k, v in dataset.__dict__.items():
+            assert v != []
+        assert dataset.title == title
+        assert dataset.authors == authors
+        assert dataset.contacts == contacts
+        assert dataset.description == description
+        assert dataset.subjects == subjects
+        assert dataset.distributors == distributors
+        assert dataset.grantNumbers == grantNumbers
+        assert dataset.keywords == keywords
+        assert dataset.language == ["English"]
+        assert dataset.notesText == notesText
+        assert dataset.otherIds == otherIds_2
+        assert dataset.publications == publications
+        assert dataset.series == series
+        assert dataset.timePeriodsCovered == partial_timePeriodsCovered
         assert dataset.license == "Attribution 4.0 International"
         assert dataset.termsOfUse == "Attribution 4.0 International"
 
