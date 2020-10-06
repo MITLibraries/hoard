@@ -1,15 +1,19 @@
 import functools
 import io
 import logging
+from typing import Any, Callable, cast, TypeVar
 
 import click
-from smart_open import open  # type: ignore
+from smart_open import open
 
 
 logger = logging.getLogger(__name__)
 
 
-def s3_log(f):
+F = TypeVar("F", bound=Callable[..., Any])
+
+
+def s3_log(f: F) -> F:
     @functools.wraps(f)
     @click.pass_context
     def wrapped(ctx, *args, **kwargs):
@@ -27,14 +31,14 @@ def s3_log(f):
                     fp.write(stream.getvalue())
         return res
 
-    return wrapped
+    return cast(F, wrapped)
 
 
-def log(f):
+def log(f: F) -> F:
     @functools.wraps(f)
     def wrapped(*args, **kwargs):
         for x in f(*args, **kwargs):
             logger.info(x)
             yield x
 
-    return wrapped
+    return cast(F, wrapped)
