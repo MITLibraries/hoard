@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Any, Dict, Iterator
 from urllib.parse import urlparse
 
@@ -96,8 +97,13 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
             field.attrib["element"] == "date"
             and "qualifier" in field.attrib
             and field.attrib["qualifier"] == "issued"
+            and field.text is not None
         ):
-            kwargs["distributionDate"] = field.text
+            try:
+                datetime.strptime(field.text, "%Y-%m-%d")
+                kwargs["distributionDate"] = field.text
+            except ValueError:
+                pass
         if field.attrib["element"] == "publisher":
             kwargs.setdefault("distributors", []).append(
                 Distributor(distributorName=field.text)
@@ -159,10 +165,19 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
                 dates = field.text.split(" - ")
                 start = dates[0]
                 end = dates[1].rstrip(" (UTC)")
+                time_kwargs = {}
+                try:
+                    datetime.strptime(start, "%Y-%m-%d")
+                    time_kwargs["timePeriodCoveredStart"] = start
+                except ValueError:
+                    pass
+                try:
+                    datetime.strptime(end, "%Y-%m-%d")
+                    time_kwargs["timePeriodCoveredEnd"] = end
+                except ValueError:
+                    pass
                 kwargs.setdefault("timePeriodsCovered", []).append(
-                    TimePeriodCovered(
-                        timePeriodCoveredStart=start, timePeriodCoveredEnd=end,
-                    )
+                    TimePeriodCovered(**time_kwargs)
                 )
         if field.attrib["element"] == "rights" and "qualifier" not in field.attrib:
             kwargs["license"] = field.text
