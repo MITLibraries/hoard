@@ -3,7 +3,7 @@ import sys
 from typing import Iterator, Optional
 
 import click
-from smart_open import open  # type: ignore
+from smart_open import open
 import requests
 import structlog  # type: ignore
 
