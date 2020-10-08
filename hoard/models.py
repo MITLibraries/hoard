@@ -3,6 +3,21 @@ from typing import Any, Dict, List, Optional, Union
 import attr
 
 
+def list_of(item_type):
+    return attr.validators.and_(
+        attr.validators.deep_iterable(
+            member_validator=attr.validators.instance_of(item_type),
+            iterable_validator=attr.validators.instance_of(list),
+        ),
+        not_empty,
+    )
+
+
+def not_empty(instance, attribute, value):
+    if len(value) == 0:
+        raise ValueError(f"'{attribute.name}' cannot be empty. Got '{value}'.")
+
+
 @attr.s(auto_attribs=True)
 class Author:
     authorName: str
@@ -81,7 +96,7 @@ class TimePeriodCovered:
 
 @attr.s(auto_attribs=True)
 class Dataset:
-    authors: List[Author]
+    authors: List[Author] = attr.ib(validator=list_of(Author))
     contacts: List[Contact]
     description: List[Description]
     subjects: List[str]
