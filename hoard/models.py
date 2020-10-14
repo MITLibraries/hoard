@@ -40,6 +40,7 @@ class Distributor:
 class GrantNumber:
     grantNumberValue: Optional[str] = None
     grantNumberAgency: Optional[str] = None
+    grantNumberInformation: Optional[str] = None
 
 
 @attr.s(auto_attribs=True)
