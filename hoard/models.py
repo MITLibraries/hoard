@@ -1,13 +1,14 @@
 from typing import Any, Dict, List, Optional, Union
 
 import attr
+from attr.validators import instance_of, optional
 
 
 def list_of(item_type):
     return attr.validators.and_(
         attr.validators.deep_iterable(
-            member_validator=attr.validators.instance_of(item_type),
-            iterable_validator=attr.validators.instance_of(list),
+            member_validator=instance_of(item_type),
+            iterable_validator=instance_of(list),
         ),
         not_empty,
     )
@@ -97,27 +98,61 @@ class TimePeriodCovered:
 @attr.s(auto_attribs=True)
 class Dataset:
     authors: List[Author] = attr.ib(validator=list_of(Author))
-    contacts: List[Contact]
-    description: List[Description]
-    subjects: List[str]
-    title: str
-    alternativeURL: Optional[str] = None
-    contributors: Optional[List[Contributor]] = None
-    distributionDate: Optional[str] = None
-    distributors: Optional[List[Distributor]] = None
-    grantNumbers: Optional[List[GrantNumber]] = None
-    keywords: Optional[List[Keyword]] = None
-    kindOfData: Optional[List[str]] = None
-    language: Optional[List[str]] = None
-    notesText: Optional[str] = None
-    otherIds: Optional[List[OtherId]] = None
-    producers: Optional[List[Producer]] = None
-    productionPlace: Optional[str] = None
-    publications: Optional[List[Publication]] = None
-    series: Optional[Series] = None
-    timePeriodsCovered: Optional[List[TimePeriodCovered]] = None
-    license: Optional[str] = None
-    termsOfUse: Optional[str] = None
+    contacts: List[Contact] = attr.ib(validator=list_of(Contact))
+    description: List[Description] = attr.ib(validator=list_of(Description))
+    subjects: List[str] = attr.ib(validator=list_of(str))
+    title: str = attr.ib(validator=instance_of(str))
+    alternativeURL: Optional[str] = attr.ib(
+        default=None, validator=optional(instance_of(str)),
+    )
+    contributors: Optional[List[Contributor]] = attr.ib(
+        default=None, validator=optional(list_of(Contributor)),
+    )
+    distributionDate: Optional[str] = attr.ib(
+        default=None, validator=optional(instance_of(str)),
+    )
+    distributors: Optional[List[Distributor]] = attr.ib(
+        default=None, validator=optional(list_of(Distributor)),
+    )
+    grantNumbers: Optional[List[GrantNumber]] = attr.ib(
+        default=None, validator=optional(list_of(GrantNumber)),
+    )
+    keywords: Optional[List[Keyword]] = attr.ib(
+        default=None, validator=optional(list_of(Keyword)),
+    )
+    kindOfData: Optional[List[str]] = attr.ib(
+        default=None, validator=optional(list_of(str)),
+    )
+    language: Optional[List[str]] = attr.ib(
+        default=None, validator=optional(list_of(str)),
+    )
+    notesText: Optional[str] = attr.ib(
+        default=None, validator=optional(instance_of(str)),
+    )
+    otherIds: Optional[List[OtherId]] = attr.ib(
+        default=None, validator=optional(list_of(OtherId)),
+    )
+    producers: Optional[List[Producer]] = attr.ib(
+        default=None, validator=optional(list_of(Producer)),
+    )
+    productionPlace: Optional[str] = attr.ib(
+        default=None, validator=optional(instance_of(str)),
+    )
+    publications: Optional[List[Publication]] = attr.ib(
+        default=None, validator=optional(list_of(Publication)),
+    )
+    series: Optional[Series] = attr.ib(
+        default=None, validator=optional(instance_of(Series)),
+    )
+    timePeriodsCovered: Optional[List[TimePeriodCovered]] = attr.ib(
+        default=None, validator=optional(list_of(TimePeriodCovered)),
+    )
+    license: Optional[str] = attr.ib(
+        default=None, validator=optional(instance_of(str)),
+    )
+    termsOfUse: Optional[str] = attr.ib(
+        default=None, validator=optional(instance_of(str)),
+    )
 
     def asdict(self) -> dict:
         fields: List[Optional[Dict[str, Any]]] = [primitive(self.title, "title")]

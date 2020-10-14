@@ -149,7 +149,7 @@ def test_asdict_removes_null_values(dataverse_partial_json_record):
         contributors=[contributors],
         grantNumbers=[grantNumbers],
         distributors=[distributors],
-        kindOfData=[],
+        kindOfData=None,
         series=series,
     )
     assert json.dumps(new_record.asdict(), sort_keys=True) == json.dumps(
