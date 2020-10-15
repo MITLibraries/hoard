@@ -165,7 +165,7 @@ class Dataset:
             compound(
                 self.grantNumbers,
                 "grantNumber",
-                ["grantNumberValue", "grantNumberAgency"],
+                ["grantNumberValue", "grantNumberAgency", "grantNumberInformation"],
             )
         )
         fields.append(compound(self.keywords, "keyword", ["keywordValue"]))

@@ -64,6 +64,7 @@ def test_full_dataset(dataverse_full_json_record):
     grantNumbers = GrantNumber(
         grantNumberValue="GrantInformationGrantNumber1",
         grantNumberAgency="GrantInformationGrantAgency1",
+        grantNumberInformation="GrantInformationInformation1",
     )
     otherIds = OtherId(
         otherIdValue="OtherIDIdentifier1", otherIdAgency="OtherIDAgency1",
