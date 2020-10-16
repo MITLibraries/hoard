@@ -133,7 +133,7 @@ def test_create_whoas_dim_xml(whoas_oai_server, dspace_oai_xml_series_name_recor
         assert dataset.title == title
         assert dataset.authors == authors
         assert dataset.contacts == contacts
-        assert dataset.description == title
+        assert dataset.description == [Description(dsDescriptionValue=title)]
         assert dataset.subjects == subjects
         assert dataset.distributors == distributors
         assert dataset.grantNumbers == grantNumbers
