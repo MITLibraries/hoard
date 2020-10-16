@@ -164,6 +164,12 @@
                   "multiple": false,
                   "typeClass": "primitive",
                   "value": "GrantInformationGrantNumber1"
+                },
+                "grantNumberInformation": {
+                  "typeName": "grantNumberInformation",
+                  "multiple": false,
+                  "typeClass": "primitive",
+                  "value": "GrantInformationInformation1"
                 }
               }
             ]

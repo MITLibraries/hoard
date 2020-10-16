@@ -114,7 +114,7 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
             and field.attrib["qualifier"] == "sponsorship"
         ):
             kwargs.setdefault("grantNumbers", []).append(
-                GrantNumber(grantNumberValue=field.text, grantNumberAgency=field.text)
+                GrantNumber(grantNumberInformation=field.text)
             )
         if field.attrib["element"] == "description" and "qualifier" not in field.attrib:
             if field.text is not None and notesText == "":

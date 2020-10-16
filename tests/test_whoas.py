@@ -59,10 +59,7 @@ def test_create_whoas_dim_xml(whoas_oai_server, dspace_oai_xml_series_name_recor
         ]
         distributors = [Distributor(distributorName="Esteemed Publishing Conglomerate")]
         grantNumbers = [
-            GrantNumber(
-                grantNumberValue="Funding for this educational package.",
-                grantNumberAgency="Funding for this educational package.",
-            )
+            GrantNumber(grantNumberInformation="Funding for this educational package.")
         ]
         keywords = [
             Keyword(keywordValue="Migration"),

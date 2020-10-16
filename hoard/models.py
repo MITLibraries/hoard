@@ -40,6 +40,7 @@ class Distributor:
 class GrantNumber:
     grantNumberValue: Optional[str] = None
     grantNumberAgency: Optional[str] = None
+    grantNumberInformation: Optional[str] = None
 
 
 @attr.s(auto_attribs=True)
@@ -164,7 +165,7 @@ class Dataset:
             compound(
                 self.grantNumbers,
                 "grantNumber",
-                ["grantNumberValue", "grantNumberAgency"],
+                ["grantNumberValue", "grantNumberAgency", "grantNumberInformation"],
             )
         )
         fields.append(compound(self.keywords, "keyword", ["keywordValue"]))
