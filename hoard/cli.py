@@ -107,7 +107,9 @@ def pipe(ctx, param, value):
 
 @main.command()
 @click.argument("authors", nargs=-1, callback=pipe)
-@click.option("--database", help="SQLAlchemy DB connection string")
+@click.option(
+    "--database", envvar="HOARD_DB_URI", help="SQLAlchemy DB connection string"
+)
 def author(authors, database) -> None:
     """Search for one or more authors.
 

@@ -8,7 +8,7 @@
             "full_name": "Durance, Honor E",
             "krb_name_uppercase": "honor",
             "email": "honor@example.com",
-            "directory_org_unit_title": "Philosophy"
+            "hr_org_unit_title": "Philosophy"
         },
         {
             "mit_id": "900000001",
@@ -18,7 +18,7 @@
             "full_name": "Briggs, Increase D",
             "krb_name_uppercase": "increase",
             "email": "increase@example.com",
-            "directory_org_unit_title": "Architecture"
+            "hr_org_unit_title": "Architecture"
         },
         {
             "mit_id": "900000002",
@@ -28,7 +28,7 @@
             "full_name": "Joiner, Temperance F",
             "krb_name_uppercase": "temperance",
             "email": "temperance@example.com",
-            "directory_org_unit_title": "Physics"
+            "hr_org_unit_title": "Physics"
         },
         {
             "mit_id": "900000003",
@@ -38,7 +38,7 @@
             "full_name": "Joiner, Silence G",
             "krb_name_uppercase": "silence",
             "email": "silence@example.com",
-            "directory_org_unit_title": "Math"
+            "hr_org_unit_title": "Math"
         }
     ],
     "orcids": [

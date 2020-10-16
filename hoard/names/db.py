@@ -22,7 +22,7 @@ authors = Table(
     Column("full_name", Unicode),
     Column("krb_name_uppercase", String),
     Column("email", String),
-    Column("directory_org_unit_title", String),
+    Column("hr_org_unit_title", String),
 )
 
 

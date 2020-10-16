@@ -24,7 +24,7 @@ class Warehouse:
                     authors.c.krb_name_uppercase.label("kerb"),
                     authors.c.full_name.label("name"),
                     orcids.c.orcid,
-                    authors.c.directory_org_unit_title.label("dlc"),
+                    authors.c.hr_org_unit_title.label("dlc"),
                 ]
             )
             .select_from(authors.outerjoin(orcids))
