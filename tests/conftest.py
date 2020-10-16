@@ -109,6 +109,9 @@ def whoas_oai_server(requests_mock, shared_datadir, request):
         "oai:darchive.mblwhoilibrary.org:1912/2372": (
             shared_datadir / "whoas/GetRecord_06.xml"
         ).read_text(),
+        "oai:darchive.mblwhoilibrary.org:1912/2373": (
+            shared_datadir / "whoas/GetRecord_07.xml"
+        ).read_text(),
     }
     requests_mock.get(
         f"{url}?verb=ListIdentifiers",
@@ -123,6 +126,7 @@ def whoas_oai_server(requests_mock, shared_datadir, request):
         records["oai:darchive.mblwhoilibrary.org:1912/2370"],
         records["oai:darchive.mblwhoilibrary.org:1912/2371"],
         records["oai:darchive.mblwhoilibrary.org:1912/2372"],
+        records["oai:darchive.mblwhoilibrary.org:1912/2373"],
     ]
 
 
