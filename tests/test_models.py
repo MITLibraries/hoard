@@ -1,4 +1,5 @@
 import json
+import pytest
 
 from hoard.models import (
     Author,
@@ -15,6 +16,49 @@ from hoard.models import (
     Series,
     TimePeriodCovered,
 )
+
+
+def test_inadequate_dataset(dataverse_minimal_json_record):
+    with pytest.raises(ValueError):
+        contact = Contact(
+            datasetContactName="Finch, Fiona",
+            datasetContactEmail="finch@mailinator.com",
+        )
+        description = Description(
+            dsDescriptionValue="Darwin's finches (also known"
+            " as the Galápagos finches) are a group of about"
+            " fifteen species of passerine birds."
+        )
+        new_record = Dataset(
+            authors=[],
+            contacts=[contact],
+            description=[description],
+            subjects=["Medicine, Health and Life Sciences"],
+            title="Darwin's Finches",
+        )
+        assert new_record.asdict() == dataverse_minimal_json_record
+
+
+def test_incorrect_dataset(dataverse_minimal_json_record):
+    with pytest.raises(TypeError):
+        author = Author(authorName="Finch, Fiona", authorAffiliation="Birds Inc.")
+        contact = Contact(
+            datasetContactName="Finch, Fiona",
+            datasetContactEmail="finch@mailinator.com",
+        )
+        description = Description(
+            dsDescriptionValue="Darwin's finches (also known"
+            " as the Galápagos finches) are a group of about"
+            " fifteen species of passerine birds."
+        )
+        new_record = Dataset(
+            authors=[author],
+            contacts=[contact],
+            description=[description],
+            subjects=[1, 2, 3],
+            title="Darwin's Finches",
+        )
+        assert new_record.asdict() == dataverse_minimal_json_record
 
 
 def test_minimal_dataset(dataverse_minimal_json_record):
@@ -150,7 +194,7 @@ def test_asdict_removes_null_values(dataverse_partial_json_record):
         contributors=[contributors],
         grantNumbers=[grantNumbers],
         distributors=[distributors],
-        kindOfData=[],
+        kindOfData=None,
         series=series,
     )
     assert json.dumps(new_record.asdict(), sort_keys=True) == json.dumps(
