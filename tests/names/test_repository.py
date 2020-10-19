@@ -1,3 +1,5 @@
+import datetime
+
 from hoard.names.db import engine
 from hoard.names.repository import Warehouse
 
@@ -12,6 +14,8 @@ def test_warehouse_finds_author(warehouse_data):
             "name": "Joiner, Temperance F",
             "orcid": None,
             "dlc": "Physics",
+            "start_date": datetime.date(2001, 1, 1),
+            "end_date": datetime.date(2020, 1, 1),
         }
     ]
 
@@ -21,12 +25,16 @@ def test_warehouse_finds_author(warehouse_data):
         "name": "Joiner, Temperance F",
         "orcid": None,
         "dlc": "Physics",
+        "start_date": datetime.date(2001, 1, 1),
+        "end_date": datetime.date(2020, 1, 1),
     } in results
     assert {
         "kerb": "silence",
         "name": "Joiner, Silence G",
         "orcid": None,
         "dlc": "Math",
+        "start_date": datetime.date(2001, 1, 1),
+        "end_date": datetime.date(2020, 1, 1),
     } in results
 
     results = list(warehouse.find(first="I", middle="D", last="Briggs"))
@@ -35,6 +43,8 @@ def test_warehouse_finds_author(warehouse_data):
         "name": "Briggs, Increase D",
         "orcid": "0000-0000-0001",
         "dlc": "Architecture",
+        "start_date": datetime.date(2001, 1, 1),
+        "end_date": datetime.date(2020, 1, 1),
     } in results
 
     results = list(warehouse.find(last="Durance"))
@@ -43,4 +53,6 @@ def test_warehouse_finds_author(warehouse_data):
         "name": "Durance, Honor E",
         "orcid": "0000-0000-0000",
         "dlc": "Philosophy",
+        "start_date": datetime.date(2001, 1, 1),
+        "end_date": datetime.date(2020, 1, 1),
     } in results

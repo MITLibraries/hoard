@@ -1,3 +1,4 @@
+import datetime
 from typing import Iterable, Optional, Protocol, TypedDict
 
 
@@ -6,6 +7,8 @@ class Author(TypedDict):
     name: str
     orcid: Optional[str]
     dlc: str
+    start_date: datetime.date
+    end_date: datetime.date
 
 
 class Searchable(Protocol):

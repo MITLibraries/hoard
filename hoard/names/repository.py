@@ -25,6 +25,8 @@ class Warehouse:
                     authors.c.full_name.label("name"),
                     orcids.c.orcid,
                     authors.c.directory_org_unit_title.label("dlc"),
+                    authors.c.original_hire_date.label("start_date"),
+                    authors.c.appointment_end_date.label("end_date"),
                 ]
             )
             .select_from(authors.outerjoin(orcids))
@@ -33,6 +35,13 @@ class Warehouse:
         )
         with closing(self.engine.connect()) as conn:
             yield from (
-                Author(kerb=row.kerb, name=row.name, orcid=row.orcid, dlc=row.dlc)
+                Author(
+                    kerb=row.kerb,
+                    name=row.name,
+                    orcid=row.orcid,
+                    dlc=row.dlc,
+                    start_date=row.start_date,
+                    end_date=row.end_date,
+                )
                 for row in conn.execute(sql)
             )
