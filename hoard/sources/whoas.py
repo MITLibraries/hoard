@@ -184,6 +184,8 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
             kwargs["termsOfUse"] = field.text
 
     kwargs["subjects"] = ["Earth and Environmental Sciences"]
+    if "description" not in kwargs:
+        kwargs["description"] = [Description(dsDescriptionValue=kwargs["title"])]
     if notesText != "":
         kwargs["notesText"] = notesText
     return Dataset(**kwargs)
