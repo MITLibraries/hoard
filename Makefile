@@ -1,5 +1,7 @@
-.PHONY: install update test tests mypy flake8 black safety check coveralls
+.PHONY: install update test tests mypy flake8 black safety check coveralls dist
 SHELL=/bin/bash
+S3_BUCKET=deploy-mitlib-stage
+ORACLE_ZIP=instantclient-basiclite-linux.x64-18.3.0.0.0dbru.zip
 
 help: ## Print this message
 	@awk 'BEGIN { FS = ":.*##"; print "Usage:  make <target>\n\nTargets:" } \
@@ -33,3 +35,15 @@ check: mypy flake8 black safety ## Run mypy, flake8, black, safety
 
 coveralls: test
 	pipenv run coveralls
+
+lib/libclntsh.so:
+	aws s3 cp s3://$(S3_BUCKET)/$(ORACLE_ZIP) lib/$(ORACLE_ZIP) && \
+  	unzip -j lib/$(ORACLE_ZIP) -d lib/ 'instantclient_18_3/*' && \
+  	rm -f lib/$(ORACLE_ZIP)
+
+dist: lib/libclntsh.so ## Create docker image
+	docker build -t hoard:latest .
+
+clean: ## Remove build artifacts and vendor libs
+	rm -rf *.egg-info .eggs build/ dist/
+	rm -rf lib/
