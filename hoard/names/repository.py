@@ -24,7 +24,7 @@ class Warehouse:
                     authors.c.krb_name_uppercase.label("kerb"),
                     authors.c.full_name.label("name"),
                     orcids.c.orcid,
-                    authors.c.directory_org_unit_title.label("dlc"),
+                    authors.c.hr_org_unit_title.label("dlc"),
                     authors.c.original_hire_date.label("start_date"),
                     authors.c.appointment_end_date.label("end_date"),
                 ]
