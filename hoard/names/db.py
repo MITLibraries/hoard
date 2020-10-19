@@ -1,6 +1,7 @@
 from sqlalchemy import (  # type: ignore
     Column,
     create_engine,
+    Date,
     ForeignKey,
     MetaData,
     String,
@@ -23,6 +24,8 @@ authors = Table(
     Column("krb_name_uppercase", String),
     Column("email", String),
     Column("hr_org_unit_title", String),
+    Column("original_hire_date", Date),
+    Column("appointment_end_date", Date),
 )
 
 

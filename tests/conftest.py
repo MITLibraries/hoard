@@ -1,3 +1,4 @@
+import datetime
 import json
 import pathlib
 
@@ -154,6 +155,13 @@ def warehouse_data(db):
     c = pathlib.Path(__file__).parent.absolute()
     with open(c / "data/warehouse.json") as fp:
         data = json.load(fp)
+        for author in data["authors"]:
+            author["original_hire_date"] = datetime.date.fromisoformat(
+                author["original_hire_date"]
+            )
+            author["appointment_end_date"] = datetime.date.fromisoformat(
+                author["appointment_end_date"]
+            )
     with engine().connect() as conn:
         conn.execute(authors.insert(), data["authors"])
         conn.execute(orcids.insert(), data["orcids"])
