@@ -41,7 +41,7 @@ def main():
     "source", type=click.Choice(["jpal", "llab", "whoas"], case_sensitive=False)
 )
 @click.argument("source_url")
-@click.option("--key", "-k", help="RDR authentication key.")
+@click.option("--key", "-k", envvar="HOARD_RDR_KEY", help="RDR authentication key.")
 @click.option(
     "--parent", "-p", default="root", help="Parent dataverse to ingest items into."
 )
