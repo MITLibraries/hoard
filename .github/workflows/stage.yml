@@ -1,10 +1,11 @@
-name: Tests
-on: push
+name: Stage
+on:
+  push:
+    branches:
+      - master
 jobs:
   test:
-    name: Run tests
-    env:
-      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+    name: Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,11 +19,10 @@ jobs:
           python -m pip install --upgrade pip pipenv
           make install
       - name: Run tests
-        run: make coveralls
-      - name: Run checks
-        run: make check
-  container:
-    name: Test container build
+        run: make test
+  deploy:
+    name: Deploy staging build
+    needs: test
     runs-on: ubuntu-latest
     env:
       AWS_DEFAULT_REGION: us-east-1
@@ -30,5 +30,5 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     steps:
       - uses: actions/checkout@v2
-      - name: Build container
-        run: make dist
+      - name: Push image
+        run: make stage
