@@ -2,6 +2,7 @@
 SHELL=/bin/bash
 S3_BUCKET=deploy-mitlib-stage
 ORACLE_ZIP=instantclient-basiclite-linux.x64-18.3.0.0.0dbru.zip
+ECR_REGISTRY=672626379771.dkr.ecr.us-east-1.amazonaws.com
 
 help: ## Print this message
 	@awk 'BEGIN { FS = ":.*##"; print "Usage:  make <target>\n\nTargets:" } \
@@ -42,7 +43,14 @@ lib/libclntsh.so:
   	rm -f lib/$(ORACLE_ZIP)
 
 dist: lib/libclntsh.so ## Create docker image
-	docker build -t hoard:latest .
+	docker build -t $(ECR_REGISTRY)/hoard-stage:latest \
+			-t $(ECR_REGISTRY)/hoard-stage:`git describe --always` \
+			-t hoard:latest .
+
+stage: dist ## Build and push to stage
+	$$(aws ecr get-login --no-include-email --region us-east-1)
+		docker push $(ECR_REGISTRY)/hoard-stage:latest
+		docker push $(ECR_REGISTRY)/hoard-stage:`git describe --always`
 
 clean: ## Remove build artifacts and vendor libs
 	rm -rf *.egg-info .eggs build/ dist/
