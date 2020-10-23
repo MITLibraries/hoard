@@ -46,8 +46,8 @@ def test_create_whoas_dim_xml(whoas_oai_server, dspace_oai_xml_series_name_recor
         ]
         contacts = [
             Contact(
-                datasetContactName="NAME, FAKE",
-                datasetContactEmail="FAKE_EMAIL@EXAMPLE.COM",
+                datasetContactName="Woods Hole Open Access Server",
+                datasetContactEmail="whoas@whoi.edu",
             )
         ]
         description = [

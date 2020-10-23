@@ -59,8 +59,8 @@ def create_from_whoas_dim_xml(data: str, client: OAIClient) -> Dataset:
     fields = record.findall(".//dim:field", namespace)
     kwargs["contacts"] = [
         Contact(
-            datasetContactName="NAME, FAKE",
-            datasetContactEmail="FAKE_EMAIL@EXAMPLE.COM",
+            datasetContactName="Woods Hole Open Access Server",
+            datasetContactEmail="whoas@whoi.edu",
         )
     ]
     notesText = ""
