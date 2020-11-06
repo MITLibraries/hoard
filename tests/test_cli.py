@@ -49,4 +49,23 @@ def test_cli_whoas_ingests(
         ],
     )
     assert result.exit_code == 0
-    assert result.output == "2 records ingested from whoas\n"
+    assert result.output == "4 records ingested from whoas\n"
+
+
+def test_cli_zenodo_ingests(requests_mock, zenodo_oai_server):
+    requests_mock.post(
+        "http+mock://example.com/api/v1/dataverses/root/datasets",
+        json={"data": {"id": 1, "persistentId": "set1"}},
+    )
+    result = CliRunner().invoke(
+        main,
+        [
+            "ingest",
+            "zenodo",
+            "http+mock://example.com/oai",
+            "--url",
+            "http+mock://example.com",
+        ],
+    )
+    assert result.exit_code == 0
+    assert result.output == "4 records ingested from zenodo\n"

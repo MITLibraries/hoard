@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/static/xsl/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2020-11-04T18:15:13Z</responseDate>
+  <request verb="GetRecord" metadataPrefix="oai_datacite" identifier="oai:zenodo.org:807750">https://zenodo.org/oai2d</request>
+  <GetRecord>
+    <record>
+      <header status="deleted">
+        <identifier>oai:zenodo.org:807750</identifier>
+        <datestamp>2020-01-24T19:23:35Z</datestamp>
+        <setSpec>openaire_data</setSpec>
+        <setSpec>user-biogeography</setSpec>
+        <setSpec>user-climatechange</setSpec>
+        <setSpec>user-ecophysiology</setSpec>
+        <setSpec>user-oceanbiogeochemistry</setSpec>
+      </header>
+    </record>
+  </GetRecord>
+</OAI-PMH>

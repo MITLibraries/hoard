@@ -12,7 +12,7 @@ from hoard.client import DataverseClient, DataverseKey, OAIClient, Transport
 from hoard.models import Dataset
 from hoard.names import AuthorService, engine, Warehouse
 from hoard.names.logging import s3_log
-from hoard.sources import JPAL, LincolnLab, WHOAS
+from hoard.sources import JPAL, LincolnLab, WHOAS, Zenodo
 
 
 @click.group()
@@ -38,7 +38,8 @@ def main():
 
 @main.command()
 @click.argument(
-    "source", type=click.Choice(["jpal", "llab", "whoas"], case_sensitive=False)
+    "source",
+    type=click.Choice(["jpal", "llab", "whoas", "zenodo"], case_sensitive=False),
 )
 @click.argument("source_url")
 @click.option("--key", "-k", envvar="HOARD_RDR_KEY", help="RDR authentication key.")
@@ -82,8 +83,12 @@ def ingest(
         stream = open(source_url)
         records = LincolnLab(stream)
     elif source == "whoas":
+        # do we need to be able to specify the set for whoas and zenodo?
         client = OAIClient(source_url, "dim", "com_1912_4134")
         records = WHOAS(client)
+    elif source == "zenodo":
+        client = OAIClient(source_url, "oai_datacite", "????")
+        records = Zenodo(client)
     for record in records:
         try:
             dv_id, p_id = rdr.create(record, parent=parent)
