@@ -28,5 +28,29 @@
       <setSpec>com_1912_4</setSpec>
       <setSpec>col_1912_2364</setSpec>
     </header>
+    <header>
+      <identifier>oai:darchive.mblwhoilibrary.org:1912/2370</identifier>
+      <datestamp>2016-09-26T17:42:49Z</datestamp>
+      <setSpec>com_1912_1726</setSpec>
+      <setSpec>com_1912_1725</setSpec>
+      <setSpec>com_1912_4</setSpec>
+      <setSpec>col_1912_2364</setSpec>
+    </header>
+    <header>
+      <identifier>oai:darchive.mblwhoilibrary.org:1912/2371</identifier>
+      <datestamp>2016-09-26T17:42:49Z</datestamp>
+      <setSpec>com_1912_1726</setSpec>
+      <setSpec>com_1912_1725</setSpec>
+      <setSpec>com_1912_4</setSpec>
+      <setSpec>col_1912_2364</setSpec>
+    </header>
+    <header>
+      <identifier>oai:darchive.mblwhoilibrary.org:1912/2372</identifier>
+      <datestamp>2016-09-26T17:42:49Z</datestamp>
+      <setSpec>com_1912_1726</setSpec>
+      <setSpec>com_1912_1725</setSpec>
+      <setSpec>com_1912_4</setSpec>
+      <setSpec>col_1912_2364</setSpec>
+    </header>
   </ListIdentifiers>
 </OAI-PMH>

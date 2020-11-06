@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/static/xsl/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2020-11-04T18:15:13Z</responseDate>
+  <request verb="GetRecord" metadataPrefix="oai_datacite" identifier="oai:zenodo.org:807751">https://zenodo.org/oai2d</request>
+  <GetRecord>
+    <record>
+      <header>
+        <identifier>oai:zenodo.org:807751</identifier>
+        <datestamp>2020-01-24T19:23:35Z</datestamp>
+        <setSpec>openaire_data</setSpec>
+        <setSpec>user-biogeography</setSpec>
+        <setSpec>user-climatechange</setSpec>
+        <setSpec>user-ecophysiology</setSpec>
+        <setSpec>user-oceanbiogeochemistry</setSpec>
+      </header>
+      <metadata>
+        <oai_datacite xmlns="http://schema.datacite.org/oai/oai-1.0/" xsi:schemaLocation="http://schema.datacite.org/oai/oai-1.0/ oai_datacite.xsd">
+          <isReferenceQuality>true</isReferenceQuality>
+          <schemaVersion>3.1</schemaVersion>
+          <datacentreSymbol>CERN.ZENODO</datacentreSymbol>
+          <payload>
+            <resource xmlns="http://datacite.org/schema/kernel-3" xsi:schemaLocation="http://datacite.org/schema/kernel-3 http://schema.datacite.org/meta/kernel-3/metadata.xsd">
+              <identifier identifierType="DOI">10.5281/zenodo.807751</identifier>
+              <creators>
+                <creator>
+                  <creatorName>Mislan, K. A. S.</creatorName>
+                  <affiliation>University of Washington</affiliation>
+                </creator>
+                <creator>
+                  <creatorName>Brill, Richard W.</creatorName>
+                  <affiliation>NOAA Northeast Fisheries Science Center</affiliation>
+                </creator>
+              </creators>
+              <publisher>Zenodo</publisher>
+              <publicationYear>2017</publicationYear>
+              <subjects>
+                <subject>tuna</subject>
+                <subject>climate change</subject>
+              </subjects>
+              <language>English</language>
+              <dates>
+                <date dateType="Issued">2017-06-13</date>
+              </dates>
+              <resourceType resourceTypeGeneral="Dataset"/>
+              <alternateIdentifiers>
+                <alternateIdentifier alternateIdentifierType="url">https://zenodo.org/record/807751</alternateIdentifier>
+              </alternateIdentifiers>
+              <relatedIdentifiers>
+                <relatedIdentifier relatedIdentifierType="URL" relationType="IsSupplementTo">https://github.com/kallisons/CMIP5_p50_tuna/tree/v1.0</relatedIdentifier>
+                <relatedIdentifier relatedIdentifierType="DOI" relationType="IsPartOf">10.5281/zenodo.807751</relatedIdentifier>
+                <relatedIdentifier relatedIdentifierType="URL" relationType="IsPartOf">https://zenodo.org/communities/biogeography</relatedIdentifier>
+                <relatedIdentifier relatedIdentifierType="URL" relationType="IsPartOf">https://zenodo.org/communities/climatechange</relatedIdentifier>
+                <relatedIdentifier relatedIdentifierType="URL" relationType="IsPartOf">https://zenodo.org/communities/ecophysiology</relatedIdentifier>
+                <relatedIdentifier relatedIdentifierType="URL" relationType="IsPartOf">https://zenodo.org/communities/oceanbiogeochemistry</relatedIdentifier>
+              </relatedIdentifiers>
+              <contributors>
+                <contributor contributorType="DataManager">
+                  <contributorName>Movahedian,Vafa</contributorName>
+                </contributor>
+              </contributors>
+              <rightsList>
+                <rights rightsURI="https://creativecommons.org/licenses/by-nc/4.0/legalcode">Creative Commons Attribution Non Commercial 4.0 International</rights>
+                <rights rightsURI="info:eu-repo/semantics/openAccess">Open Access</rights>
+              </rightsList>
+              <descriptions>
+                <description descriptionType="Abstract">Model results and data used to make future</description>
+                <description descriptionType="Abstract">Sample abstract</description>
+              </descriptions>
+            </resource>
+          </payload>
+        </oai_datacite>
+      </metadata>
+    </record>
+  </GetRecord>
+</OAI-PMH>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="static/style.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2020-08-12T18:29:50Z</responseDate>
+  <request verb="ListIdentifiers" metadataPrefix="oai_datacite" set="user-climatechange">https://zenodo.org/oai2d</request>
+  <ListIdentifiers>
+    <header>
+      <identifier>oai:zenodo.org:807748</identifier>
+      <datestamp>2016-09-26T17:42:49Z</datestamp>
+      <setSpec>user-climatechange</setSpec>
+      <setSpec>openaire_data</setSpec>
+    </header>
+    <header>
+      <identifier>oai:zenodo.org:807749</identifier>
+      <datestamp>2016-09-26T17:42:49Z</datestamp>
+      <setSpec>user-climatechange</setSpec>
+      <setSpec>openaire_data</setSpec>
+    </header>
+    <header>
+      <identifier>oai:zenodo.org:807750</identifier>
+      <datestamp>2016-09-26T17:42:49Z</datestamp>
+      <setSpec>user-climatechange</setSpec>
+      <setSpec>openaire_data</setSpec>
+    </header>
+    <header>
+      <identifier>oai:zenodo.org:807751</identifier>
+      <datestamp>2016-09-26T17:42:49Z</datestamp>
+      <setSpec>user-climatechange</setSpec>
+      <setSpec>openaire_data</setSpec>
+    </header>
+    <header>
+      <identifier>oai:zenodo.org:807752</identifier>
+      <datestamp>2016-09-26T17:42:49Z</datestamp>
+      <setSpec>user-climatechange</setSpec>
+      <setSpec>openaire_data</setSpec>
+    </header>
+    <header>
+      <identifier>oai:zenodo.org:807753</identifier>
+      <datestamp>2016-09-26T17:42:49Z</datestamp>
+      <setSpec>user-climatechange</setSpec>
+      <setSpec>openaire_data</setSpec>
+    </header>
+  </ListIdentifiers>
+</OAI-PMH>

@@ -26,6 +26,7 @@ sqlalchemy = "*"
 cx-oracle = "*"
 structlog = "*"
 colorama = "*"
+lxml = "*"
 
 [requires]
 python_version = "3.8"

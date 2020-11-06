@@ -110,9 +110,6 @@ def whoas_oai_server(requests_mock, shared_datadir, request):
         "oai:darchive.mblwhoilibrary.org:1912/2372": (
             shared_datadir / "whoas/GetRecord_06.xml"
         ).read_text(),
-        "oai:darchive.mblwhoilibrary.org:1912/2373": (
-            shared_datadir / "whoas/GetRecord_07.xml"
-        ).read_text(),
     }
     requests_mock.get(
         f"{url}?verb=ListIdentifiers",
@@ -127,7 +124,45 @@ def whoas_oai_server(requests_mock, shared_datadir, request):
         records["oai:darchive.mblwhoilibrary.org:1912/2370"],
         records["oai:darchive.mblwhoilibrary.org:1912/2371"],
         records["oai:darchive.mblwhoilibrary.org:1912/2372"],
-        records["oai:darchive.mblwhoilibrary.org:1912/2373"],
+    ]
+
+
+@pytest.fixture
+def zenodo_oai_server(requests_mock, shared_datadir, request):
+    url = "http+mock://example.com/oai"
+    records = {
+        "oai:zenodo.org:807748": (
+            shared_datadir / "zenodo/GetRecord_01.xml"
+        ).read_text(),
+        "oai:zenodo.org:807749": (
+            shared_datadir / "zenodo/GetRecord_02.xml"
+        ).read_text(),
+        "oai:zenodo.org:807750": (
+            shared_datadir / "zenodo/GetRecord_03.xml"
+        ).read_text(),
+        "oai:zenodo.org:807751": (
+            shared_datadir / "zenodo/GetRecord_04.xml"
+        ).read_text(),
+        "oai:zenodo.org:807752": (
+            shared_datadir / "zenodo/GetRecord_05.xml"
+        ).read_text(),
+        "oai:zenodo.org:807753": (
+            shared_datadir / "zenodo/GetRecord_06.xml"
+        ).read_text(),
+    }
+    requests_mock.get(
+        f"{url}?verb=ListIdentifiers",
+        text=(shared_datadir / "zenodo/ListRecords.xml").read_text(),
+    )
+    for k, v in records.items():
+        requests_mock.get(f"{url}?identifier={k}", text=v)
+    return [
+        records["oai:zenodo.org:807748"],
+        records["oai:zenodo.org:807749"],
+        records["oai:zenodo.org:807750"],
+        records["oai:zenodo.org:807751"],
+        records["oai:zenodo.org:807752"],
+        records["oai:zenodo.org:807753"],
     ]
 
 
