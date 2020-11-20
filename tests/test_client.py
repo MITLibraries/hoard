@@ -57,3 +57,16 @@ def test_oaiclient_iterates_over_records(jpal_oai_server):
         "http+mock://example.com/oai", "dataverse_json", "Jameel_Poverty_Action_Lab"
     )
     assert list(records) == jpal_oai_server
+
+
+def test_oaiclient_skips_records_after_from_date(whoas_oai_server):
+    records = OAIClient(
+        "http+mock://example.com/oai", "dim", "com_1912_1726", "2016-09-25"
+    )
+    assert list(records) == [
+        whoas_oai_server[0],
+        whoas_oai_server[1],
+        whoas_oai_server[3],
+        whoas_oai_server[4],
+        whoas_oai_server[5],
+    ]

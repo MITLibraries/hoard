@@ -38,7 +38,8 @@ def test_cli_whoas_ingests(
         "http+mock://example.com/api/v1/dataverses/root/datasets",
         json={"data": {"id": 1, "persistentId": "set1"}},
     )
-    result = CliRunner().invoke(
+    # without from_date
+    result_1 = CliRunner().invoke(
         main,
         [
             "ingest",
@@ -48,5 +49,21 @@ def test_cli_whoas_ingests(
             "http+mock://example.com",
         ],
     )
-    assert result.exit_code == 0
-    assert result.output == "2 records ingested from whoas\n"
+    assert result_1.exit_code == 0
+    assert result_1.output == "5 records ingested from whoas\n"
+
+    # with from_date
+    result_2 = CliRunner().invoke(
+        main,
+        [
+            "ingest",
+            "whoas",
+            "http+mock://example.com/oai",
+            "--url",
+            "http+mock://example.com",
+            "--from_date",
+            "2016-09-25",
+        ],
+    )
+    assert result_2.exit_code == 0
+    assert result_2.output == "4 records ingested from whoas\n"
