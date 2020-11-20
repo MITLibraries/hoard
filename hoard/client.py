@@ -1,11 +1,15 @@
+from datetime import datetime
 from typing import Iterator, Optional, Tuple
 
 import requests
 from sickle import Sickle  # type: ignore
+import structlog  # type: ignore
 import xml.etree.ElementTree as ET
 
 from hoard.api import Api
 from hoard.models import Dataset
+
+logger = structlog.get_logger()
 
 
 class Transport:
@@ -55,10 +59,13 @@ class DSpaceClient:
 
 
 class OAIClient:
-    def __init__(self, source_url: str, format: str, set: str = None) -> None:
+    def __init__(
+        self, source_url: str, format: str, set: str = None, from_date: str = None
+    ) -> None:
         self.source_url = source_url
         self.format = format
         self.set = set
+        self.from_date = from_date
         self.ids: Optional[Iterator] = None
         client = Sickle(self.source_url)
         self.client = client
@@ -96,6 +103,12 @@ class OAIClient:
     def fetch_ids(self) -> Iterator:
         client = self.client
         params = {"metadataPrefix": self.format}
+        if self.from_date is not None:
+            try:
+                datetime.strptime(self.from_date, "%Y-%m-%d")
+                params["from"] = self.from_date
+            except ValueError:
+                logger.info(f"{self.from_date} is not a valid date and was ignored.")
         if self.set is not None:
             params["set"] = self.set
         ids = client.ListIdentifiers(**params)

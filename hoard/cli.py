@@ -56,6 +56,9 @@ def main():
     help="Path to file for name lookup log. Use s3://bucket/key for S3 logging.",
 )
 @click.option("--verbose", "-v", is_flag=True)
+@click.option(
+    "--from_date", "-f", help="The record date after which records should be ingested"
+)
 @s3_log
 def ingest(
     source: str,
@@ -65,6 +68,7 @@ def ingest(
     parent: str,
     name_log: str,
     verbose: bool,
+    from_date: str,
 ) -> None:
     """Ingest a source into RDR.
 
@@ -76,13 +80,15 @@ def ingest(
     rdr = DataverseClient(Api(url, DataverseKey(key)), Transport())
     records: Iterator[Dataset]
     if source == "jpal":
-        client = OAIClient(source_url, "dataverse_json", "Jameel_Poverty_Action_Lab")
+        client = OAIClient(
+            source_url, "dataverse_json", "Jameel_Poverty_Action_Lab", from_date
+        )
         records = JPAL(client)
     elif source == "llab":
         stream = open(source_url)
         records = LincolnLab(stream)
     elif source == "whoas":
-        client = OAIClient(source_url, "dim", "com_1912_4134")
+        client = OAIClient(source_url, "dim", "com_1912_4134", from_date)
         records = WHOAS(client)
     for record in records:
         try:

@@ -118,6 +118,10 @@ def whoas_oai_server(requests_mock, shared_datadir, request):
         f"{url}?verb=ListIdentifiers",
         text=(shared_datadir / "whoas/ListRecords.xml").read_text(),
     )
+    requests_mock.get(
+        f"{url}?verb=ListIdentifiers&from=2016-09-25",
+        text=(shared_datadir / "whoas/ListRecordsDateTest.xml").read_text(),
+    )
     for k, v in records.items():
         requests_mock.get(f"{url}?identifier={k}", text=v)
     return [
